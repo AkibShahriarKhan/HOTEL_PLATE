@@ -1,6 +1,14 @@
 <?php
     session_start();
-?>
+    $bal=$_SESSION['usr'];
+    ?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -54,6 +62,22 @@
       text-align: center;
       float: right;    }
 
+
+
+      .container2{
+        opacity: 0.8;
+        border-radius: 4px;
+        background-color: #F5B7B1;
+        margin-top: 4%;
+        margin-left: 5%;
+        margin-right: 30%;
+        padding: 20px;
+        width: 600px;
+
+        font-size: 35px;
+        float: left;
+      }
+
     body{
       background-image: url("img/2.jpg");
       background-size: cover;
@@ -67,7 +91,7 @@
 
     label{
       margin-top: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       display: inline-block;
       float: left;
       clear: left;
@@ -76,6 +100,18 @@
       font-family: calibri;
       font-weight: lighter;
       text-transform: uppercase;    }
+      input {
+        border-radius: 0px;
+        border: none;
+        text-align: center;
+        padding: 5px;
+        margin-top: 10px;
+        margin-left: -10px;
+        margin-bottom: 10px;
+        width: 300px;
+        display: inline-block;
+        float: left;
+      }
 
     .btn{
       background-color: red;
@@ -152,6 +188,12 @@
       display: inline-block;
       width: 25%;    }
 
+
+
+
+
+}
+
     label{
       text-transform: uppercase;
       font-family: calibri;
@@ -165,10 +207,6 @@
 
   <header> sala_dia_dhaka </header>
   <ul>
-
-
-
-
     <li><a style="float: right; margin: 0;" href="lout.php">LOGOUT</a></li>
     <li><a href="abt.php">About us</a></li>
     <li><a href="con.php">Contact</a></li>
@@ -176,80 +214,76 @@
     <li><a href="client.php"><?php echo $_SESSION['usr']; ?></a></li>
     <li style="margin-top:00px;"><a class = "active" href="home.php">Home</a></li>
   </ul>
-  <?php //echo "<wl>Welcome, ".$_SESSION['usr']."</wl>"; ?>
+
+<?php
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "wtproject";
+
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+  }
+
+
+  $sql = "SELECT c_name,c_email, c_pass, c_gender, c_phone, c_age, c_occupation, c_photo FROM client WHERE c_email='$bal'";
+  $result = $conn->query($sql);
+
+  if ($result->num_rows > 0) {
+  echo "<table class='container2' width:10%>";
+  while($row = $result->fetch_assoc()) {
 
 
 
+
+
+  echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]."</td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["c_name"]."</td></tr>";
+
+
+
+
+
+
+
+  }
+  echo "</table>";
+
+  }
+
+  else {
+  echo "0 results";
+  }
+?>
+
+
+  <!--<form class="container2" action = "<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method = "post">
+    <label>First Name </label>
+    <input type="text" name = "fn" placeholder="<?php $c_name=$_SESSION['name']; echo $c_name;?>" required/><br><br>
+    <label>Email </label>
+    <input type="email" name = "mail" placeholder="<?php $c_email=$_SESSION['usr']; echo $c_email;?>" required/><br><br>
+    <label>phone </label>
+    <input type="text" name = "m" placeholder="ex: 01710XXXXXX" required/><br><br>
+    <label>National ID </label>
+    <input type = "text" name = "nid" placeholder="NID" required/><br><br>
+    <label>user name</label>
+    <input type="text" name = "u" placeholder="User Name" required/><br><br>
+    <label>password</label>
+    <input type="password" name = "p" placeholder="Password" required/><br><br>
+    <input class = "btn" style = "width: 165px; margin-left: 215px" type = "submit" value = "Register">
+  </form>
 
 
 
   <form style = "position: fixed; margin-left: 85%;" action  = "chk.php" method = "post">
     <input type="hidden" name = "chk" value = "1">
     <input class = "btn" type = "submit" name = "ch" value = "Checkout">
-  </form>
-
-  <table class = "tableC" style = "margin-left:1PX;">
-    <tr>
-      <th> HOTEL 1 </th>
-      <th> HOTEL 2 </th>
-      <th> HOTEL 3 </th>
-    </tr>
-    <tr>
-
-      <td style = "border: 2px solid grey;" >
+  </form>-->
 
 
-        <form action = "add.php" method="post">
 
-          <label>Room ID:</label><br>
-
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: -10px; margin-left: -120px" type = "text" name = "id" value = "R1" readonly><img src="img/r1.jpg" style="width:200px; height:auto; alt="h1">
-          <label>Price($): </label><br>
-
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: 10px; margin-left: -120px" type = "text" name = "price" value = "200" readonly>
-          <label>Room Quantity: </label>
-          <input style = "width:40px; margin-top: 50px; margin-left: -120px;" type = "text" name = "Quan">
-          <input type = "submit" value = "Book">
-
-        </form>
-      </td>
-
-
-      <td style = "border: 2px solid grey;">
-
-        <form action = "add.php?>" method="post">
-          <label>Room ID:</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: -10px; margin-left: -120px" type = "text" name = "id" value = "R2" readonly><img src="img/r2.jpg" style="width:200px; height:auto; alt="h2">
-          <label>Price($):</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: 10px; margin-left: -120px" type = "text" name = "price" value = "200" readonly>
-          <label>Room Quantity:</label>
-          <input style = "width:40px; margin-top: 50px; margin-left: -120px;" type = "text" name = "Quan">
-          <input type = "submit" value = "Book">
-        </form>
-      </td>
-
-
-      <td style = "border: 2px solid grey;">
-
-        <form action = "add.php?>" method="post">
-          <label>Room ID:</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: -10px; margin-left: -120px" type = "text" name = "id" value = "R3" readonly><img src="img/r3.jpg" style="width:200px; height:auto; alt="h3">
-          <label>Price($):</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: 10px; margin-left: -120px" type = "text" name = "price" value = "200" readonly>
-          <label>Room Quantity:</label>
-          <input style = "width:40px; margin-top: 50px; margin-left: -120px;" type = "text" name = "Quan">
-          <input type = "submit" value = "Book">
-        </form>
-      </td>
-
-  </table>
-
-  <table class = "tableC2">
-    <tr>
-      <th>ROOM</th>
-      <th>Quantity</th>
-      <th>Price</th>
-    </tr>
     <?php
       if(isset($_SESSION['arr']) && !empty($_SESSION['arr']))
       {

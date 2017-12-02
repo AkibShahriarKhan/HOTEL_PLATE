@@ -158,26 +158,24 @@
 
     <form class="container" action = "<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method = "post">
       <label>First Name </label>
-      <input type="text" name = "fn" placeholder="First Name" required/>
-      <label>last Name </label>
-      <input type="text" name = "ln" placeholder="Last Name" required/>
+      <input type="text" name = "fn" placeholder="Your Name" required/>
       <label>Email </label>
       <input type="email" name = "mail" placeholder="ex: someone@domain.com" required/>
-      <label>phone </label>
+    <!--  <label>phone </label>
       <input type="text" name = "m" placeholder="ex: 01710XXXXXX" required/>
       <label>National ID </label>
       <input type = "text" name = "nid" placeholder="NID" required/>
       <label>user name</label>
-      <input type="text" name = "u" placeholder="User Name" required/>
+      <input type="text" name = "u" placeholder="User Name" required/>-->
       <label>password</label>
-      <input type="password" name = "p" placeholder="password" required/>
+      <input type="password" name = "p" placeholder="Password" required/>
       <input class = "btn" style = "width: 165px; margin-left: 215px" type = "submit" value = "Register">
 
 	   <?php
 			$servername = "localhost";
 			$username = "root";
 			$password = "";
-			$dbname = "saladia";
+			$dbname = "wtproject";
 
 			// Create connection
 			$conn = new mysqli($servername, $username, $password, $dbname);
@@ -185,15 +183,6 @@
 			if ($conn->connect_error) {
 				die("Connection failed: " . $conn->connect_error);
 			}
-
-
-
-
-
-
-
-
-
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -207,17 +196,16 @@
           }
 
           $fname = purify($_POST['fn']);
-          $lname = purify($_POST['ln']);
           $email = purify($_POST['mail']);
-          $mobile = purify($_POST['m']);
-          $usr = purify($_POST['u']);
+          //$mobile = purify($_POST['m']);
+          //$usr = purify($_POST['u']);
           $pass = purify($_POST['p']);
-          $id = purify($_POST['nid']);
+          //$id = purify($_POST['nid']);
 
 
 
-		  $sql = "INSERT INTO reg (firstname, lastname, email, NID, user, pass)
-			VALUES ('$fname', '$lname', '$email', '$id', '$usr','$pass'  )";
+		  $sql = "INSERT INTO client (c_name,c_email,c_pass)
+			VALUES ('$fname', '$email', '$pass'  )";
 
 
 		  if ($conn->query($sql) === TRUE) {

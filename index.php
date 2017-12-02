@@ -17,8 +17,20 @@
       text-align: center;
       width: 165px;
     }
+    .btn2{
+      background-color: red;
+      padding: 15px 32px;
+      color: white;
+      border: none;
+      text-decoration: none;
+      text-align: center;
+      width: 165px;
+    }
 
     .btn:hover{
+      background-color: #00cc00;
+    }
+    .btn2:hover{
       background-color: #00cc00;
     }
 
@@ -95,6 +107,8 @@
 
     }
 
+
+
     header{
       padding: 20px;
       text-align: center;
@@ -148,8 +162,14 @@
   <input class = "btn" type = "submit" name = "login" value = "LOGIN"/>
 </form></center>
 
-<br><center><a href = "reg.php"> Create New Account </a></center>
-</div>
+<!--<br><center><a href = "reg.php"> Create New Account </a></center>-->
+<center><form action="reg.php">
+  <input class = "btn2" type = "submit" name = "login" value = "SIGN UP"/>
+</form></center>
+
+
+
+
 
 <footer style = "font-family:calibri; letter-spacing:2px; background: orange; text-transform: uppercase;"> Copyright &copy 2018 </footer>
 </body>
@@ -165,7 +185,7 @@
 $servername = "localhost";
 			$username = "root";
 			$password = "";
-			$dbname = "saladia";
+			$dbname = "wtproject";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -191,19 +211,19 @@ if ($conn->connect_error) {
       $pas = purify($_POST['pass']);
 
 
-	$sql = "SELECT user, pass FROM reg";
+	$sql = "SELECT c_email, c_pass FROM client";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
 		// output data of each row
 		while($row = $result->fetch_assoc()) {
 			//echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-			if(!empty($row["user"]))
+			if(!empty($row["c_email"]))
     		{
-    			if(trim($row["user"]) == $usrName)
+    			if(trim($row["c_email"]) == $usrName)
     			{
     				$flag = true;
-    				if(trim($row["pass"]) == $pas)
+    				if(trim($row["c_pass"]) == $pas)
     				{
               $_SESSION['usr'] = $usrName;
     					echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";

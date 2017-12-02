@@ -3,7 +3,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "saladia";
+$dbname = "wtproject";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -128,7 +128,7 @@ $usrName = $_SESSION['usr'];
     foreach($ar as $x=> $x_val)
     {
 
-      $sql = "INSERT INTO orderList (user, product, quantity, cost, time)
+      $sql = "INSERT INTO order_list (user, product, quantity, cost, time)
       VALUES ('$usrName', '$x', '$x_val[0]', '$x_val[1]', '$d'  )";
 
     }
