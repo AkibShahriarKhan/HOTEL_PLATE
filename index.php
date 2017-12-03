@@ -8,7 +8,23 @@
   <title> Welcome! </title>
 
   <style>
-    .btn{
+	.searchBox{
+		
+	}
+	.inpText{
+		width: 50%;
+		margin: 0% 0% 0% 15%;
+	}
+	.inpBtn{
+	  width: 20%;
+	  background-color: green;
+      padding: 11px 32px;
+      color: white;
+      border: none;
+      text-decoration: none;
+      text-align: center;
+	}
+    .btnLogin{
       background-color: green;
       padding: 15px 32px;
       color: white;
@@ -17,7 +33,7 @@
       text-align: center;
       width: 165px;
     }
-    .btn2{
+    .btnSign{
       background-color: red;
       padding: 15px 32px;
       color: white;
@@ -100,9 +116,7 @@
       opacity: 0.8;
       border-radius: 4px;
       background-color: #ffcc99;
-      margin-top: 3%;
-      margin-left: 60%;
-      margin-right: 1%;
+      margin:10px;
       padding: 20px;
 
     }
@@ -153,19 +167,24 @@
 <body>
 
 <header> sala_dia_dhaka </header>
-
+<div class="searchBox">
+	<input class="inpText"type="text" maxlength="200" name="searchQuerry">
+	<input class="inpBtn" type="Submit" value="Search">
+</div>
 <div>
 <center><form action="index.php" method = "post">
 
   <input type = "text" name = "usr" placeholder="User Name" required/>
   <input type="password" name="pass" placeholder="Password" required/><br><br>
-  <input class = "btn" type = "submit" name = "login" value = "LOGIN"/>
+  <input class = "btnLogin" type = "submit" value = "LOGIN"/>
 </form></center>
 
 <!--<br><center><a href = "reg.php"> Create New Account </a></center>-->
 <center><form action="reg.php">
-  <input class = "btn2" type = "submit" name = "login" value = "SIGN UP"/>
+  <input class = "btnSign" type = "submit" value = "SIGN UP"/>
 </form></center>
+
+
 
 
 
