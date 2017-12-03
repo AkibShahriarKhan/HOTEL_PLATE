@@ -157,6 +157,11 @@
 
     li a:hover:not(.active){
       background-color:#D6EAF8;    }
+	  
+	.aCust{
+		color:blue;
+		font-size:8;
+	}
 
     footer{
       text-align: center;
@@ -234,30 +239,27 @@
 
   if ($result->num_rows > 0) {
   echo "<table class='container2' width:10%>";
-  while($row = $result->fetch_assoc()) {
+  if(!isset($_GET['edit']) || $_GET['edit'] == 'false')
+  {
+	  while($row = $result->fetch_assoc()) {
 
-$image_data = $row['c_photo'];
-$encoded_image = base64_encode($image_data);
-//You dont need to decode it again.
- 
-$Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' >";
- 
-//and you echo $Hinh
-//echo $Hinh."</img>";
-
-
-
-
-  echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]."</td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$Hinh."</img>"."</td></tr>";
-
-
-
-
-
-
-
+		echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]." <a class = 'aCust' style = 'font-size:8' href='client.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["c_name"]."</td></tr>";
+		
   }
   echo "</table>";
+  }
+  else if($_GET['edit'] == 'true')
+  {
+	while($row = $result->fetch_assoc()) {
+
+		echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]." <a class = 'aCust' style = 'font-size:8' href='client.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["c_name"]."</td></tr>";
+		
+  }
+  echo "</table>";
+	
+	$_GET['edit'] == 'false';
+  }
+  
 
   }
 
