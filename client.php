@@ -236,11 +236,19 @@
   echo "<table class='container2' width:10%>";
   while($row = $result->fetch_assoc()) {
 
+$image_data = $row['c_photo'];
+$encoded_image = base64_encode($image_data);
+//You dont need to decode it again.
+ 
+$Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' >";
+ 
+//and you echo $Hinh
+//echo $Hinh."</img>";
 
 
 
 
-  echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]."</td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["c_name"]."</td></tr>";
+  echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]."</td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$Hinh."</img>"."</td></tr>";
 
 
 
