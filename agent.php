@@ -220,6 +220,14 @@
     <li style="margin-top:00px;"><a class = "active" href="agent_home.php">Home</a></li>
   </ul>
 
+
+  <form style = "position: fixed; margin-left: 65%;" action  = "reg_hotel.php" method = "post">
+    <input type="hidden">
+    <input class = "btn" type = "submit" name = "hotel_reg" value = "Register Hotels">
+  </form>
+
+
+
 <?php
   $servername = "localhost";
   $username = "root";
