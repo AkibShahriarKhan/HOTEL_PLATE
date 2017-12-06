@@ -224,7 +224,7 @@
 
 		  if ($conn->query($sql) === TRUE) {
 
-				//echo "New record created successfully";
+				echo "<script type='text/javascript'>alert('Successfully Register!')</script>";
 			} else {
 				echo "Error: " . $sql . "<br>" . $conn->error;
 			}
