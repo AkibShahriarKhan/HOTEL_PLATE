@@ -5,7 +5,7 @@
 <html>
 
 <head>
-  <title> Home </title>
+  <title>Agent Home </title>
 
   <style>
     header{
@@ -173,7 +173,7 @@
     <li><a href="abt.php">About us</a></li>
     <li><a href="con.php">Contact</a></li>
     <li><a href="reg.php">Registration</a></li>
-    <li><a href="client.php"><?php echo $_SESSION['usr']; ?></a></li>
+    <li><a href="agent.php"><?php echo $_SESSION['usr']; ?></a></li>
     <li style="margin-top:00px;"><a class = "active" href="home.php">Home</a></li>
   </ul>
   <?php //echo "<wl>Welcome, ".$_SESSION['usr']."</wl>"; ?>
