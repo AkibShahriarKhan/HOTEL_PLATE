@@ -157,7 +157,7 @@
 
     li a:hover:not(.active){
       background-color:#D6EAF8;    }
-	  
+
 	.aCust{
 		color:blue;
 		font-size:8;
@@ -243,8 +243,17 @@
   {
 	  while($row = $result->fetch_assoc()) {
 
-		echo "<tr><td>"."NAME:"."</td><td>".$row["a_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["a_email"]."</td><tr><td> "."Password"."</td><td>".$row["a_pass"]." <a class = 'aCust' style = 'font-size:8' href='agent.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["a_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["a_position"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["a_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["a_photo"]."</td></tr>";
-		
+      $image_data = $row["a_photo"];
+      $image_name = $row["a_name"];
+      $encoded_image = base64_encode($image_data);
+      //You dont need to decode it again.
+
+      $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\">";
+
+
+
+		echo "<tr><td>"."NAME:"."</td><td>".$row["a_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["a_email"]."</td><tr><td> "."Password"."</td><td>".$row["a_pass"]." <a class = 'aCust' style = 'font-size:8' href='agent.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["a_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["a_position"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["a_phone"]."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
+
   }
   echo "</table>";
   }
@@ -253,13 +262,13 @@
 	while($row = $result->fetch_assoc()) {
 
 		echo "<tr><td>"."NAME:"."</td><td>".$row["a_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["a_email"]."</td><tr><td> "."Password"."</td><td>".$row["a_pass"]." <a class = 'aCust' style = 'font-size:8' href='agent.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["a_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["a_position"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["a_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["a_photo"]."</td></tr>";
-		
+
   }
   echo "</table>";
-	
+
 	$_GET['edit'] == 'false';
   }
-  
+
 
   }
 
