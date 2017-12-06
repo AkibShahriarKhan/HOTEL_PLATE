@@ -218,11 +218,16 @@
 
 
 
-		  $sql = "INSERT INTO agent (a_name, a_email, a_pass, a_gender, a_phone, a_age, a_position, a_photo, a_id)
-			VALUES ('$name', '$email', '$pass', '$phone', '$age', '$position', '$agent_id', '$photo', '$agent_id')";
+		  $sql = "INSERT INTO agent (a_name, a_email, a_pass, a_phone, a_age, a_position, a_photo, a_id)
+			VALUES ('$name', '$email', '$pass', '$phone', '$age', '$position', '$photo', '$agent_id')";
 
 
 		  if ($conn->query($sql) === TRUE) {
+			  <script>
+function myFunction() {
+    alert("I am an alert box!");
+}
+</script>
 				//echo "New record created successfully";
 			} else {
 				echo "Error: " . $sql . "<br>" . $conn->error;
