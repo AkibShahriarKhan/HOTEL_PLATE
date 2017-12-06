@@ -157,7 +157,7 @@
 
     li a:hover:not(.active){
       background-color:#D6EAF8;    }
-	  
+
 	.aCust{
 		color:blue;
 		font-size:8;
@@ -237,14 +237,33 @@
   $sql = "SELECT c_name,c_email, c_pass, c_gender, c_phone, c_age, c_occupation, c_photo FROM client WHERE c_email='$bal'";
   $result = $conn->query($sql);
 
+
+
+
+  //and you echo $Hinh
+//  echo
+
+
+
+
+
+
+
+
   if ($result->num_rows > 0) {
   echo "<table class='container2' width:10%>";
   if(!isset($_GET['edit']) || $_GET['edit'] == 'false')
   {
 	  while($row = $result->fetch_assoc()) {
+      $image_data = $row["c_photo"];
+      $image_name = $row["c_name"];
+      $encoded_image = base64_encode($image_data);
+      //You dont need to decode it again.
 
-		echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]." <a class = 'aCust' style = 'font-size:8' href='client.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["c_name"]."</td></tr>";
-		
+      $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\">";
+
+		echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]." <a class = 'aCust' style = 'font-size:8' href='client.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
+
   }
   echo "</table>";
   }
@@ -253,13 +272,13 @@
 	while($row = $result->fetch_assoc()) {
 
 		echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]." <a class = 'aCust' style = 'font-size:8' href='client.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["c_name"]."</td></tr>";
-		
+
   }
   echo "</table>";
-	
+
 	$_GET['edit'] == 'false';
   }
-  
+
 
   }
 
