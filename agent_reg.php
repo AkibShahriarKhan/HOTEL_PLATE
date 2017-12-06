@@ -223,11 +223,7 @@
 
 
 		  if ($conn->query($sql) === TRUE) {
-			  <script>
-function myFunction() {
-    alert("I am an alert box!");
-}
-</script>
+
 				//echo "New record created successfully";
 			} else {
 				echo "Error: " . $sql . "<br>" . $conn->error;
