@@ -217,7 +217,7 @@
     <li><a href="con.php">Contact</a></li>
     <li><a href="reg.php">Registration</a></li>
     <li><a href="agent.php"><?php echo $_SESSION['usr']; ?></a></li>
-    <li style="margin-top:00px;"><a class = "active" href="home.php">Home</a></li>
+    <li style="margin-top:00px;"><a class = "active" href="agent_home.php">Home</a></li>
   </ul>
 
 <?php

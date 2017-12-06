@@ -174,7 +174,7 @@
     <li><a href="con.php">Contact</a></li>
     <li><a href="reg.php">Registration</a></li>
     <li><a href="agent.php"><?php echo $_SESSION['usr']; ?></a></li>
-    <li style="margin-top:00px;"><a class = "active" href="home.php">Home</a></li>
+    <li style="margin-top:00px;"><a class = "active" href="agent_home.php">Home</a></li>
   </ul>
   <?php //echo "<wl>Welcome, ".$_SESSION['usr']."</wl>"; ?>
 
@@ -215,7 +215,7 @@
       </td>
 
 
-      <td style = "border: 2px solid grey;">
+    <!--  <td style = "border: 2px solid grey;">
 
         <form action = "add.php?>" method="post">
           <label>Room ID:</label><br>
@@ -226,7 +226,7 @@
           <input style = "width:40px; margin-top: 50px; margin-left: -120px;" type = "text" name = "Quan">
           <input type = "submit" value = "Book">
         </form>
-      </td>
+      </td>-->
 
 
       <td style = "border: 2px solid grey;">
