@@ -232,12 +232,9 @@ if ($conn->connect_error) {
 
 	$sql = "SELECT c_email, c_pass FROM client";
 	$result = $conn->query($sql);
-	
-	$_sql = "SELECT a_email, a_pass FROM agent";
-	$_result = $conn->query($_sql);
 
 	if ($result->num_rows > 0) {
-		//output data of each row
+		// output data of each row
 		while($row = $result->fetch_assoc()) {
 			//echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
 			if(!empty($row["c_email"]))
@@ -262,44 +259,12 @@ if ($conn->connect_error) {
     		}
 
 		}
-	} 
-	else {
+	} else {
 		echo "0 results";
 	}
-	 if($_result->num_rows > 0){
-			if ($_result->num_rows > 0) {
-		// output data of each row
-		while($_row = $_result->fetch_assoc()) {
-			//echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-			if(!empty($_row["a_email"]))
-    		{
-    			if(trim($_row["a_email"]) == $usrName)
-    			{
-    				$flag = true;
-    				if(trim($_row["a_pass"]) == $pas)
-    				{
-						//echo "Done";
-              $_SESSION['usr'] = $usrName;
-    					echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
-              header("location:agent_home.php");
-    					break;
 
-    				}
-    				else
-    				{
-    					echo "<center>Password doesn't match!<br><center>";
-    					break;
-    				}
-    			}
-    		}
 
-		}
-	}
-		
-	}
-	else {
-		echo "0 results";
-	}
 
     }
+
  ?>

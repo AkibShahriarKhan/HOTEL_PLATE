@@ -170,7 +170,6 @@
       <label>password</label>
       <input type="password" name = "p" placeholder="Password" required/>
       <input class = "btn" style = "width: 165px; margin-left: 215px" type = "submit" value = "Register">
-	  <a href="agent_reg.php">Register as An Agent?</a>
 
 	   <?php
 			$servername = "localhost";
@@ -220,7 +219,6 @@
 		}
 
         ?>
-		
     </form>
 
 <footer style = "font-family:calibri; letter-spacing:2px; background: orange; text-transform: uppercase;"> Copyright &copy 2018 </footer>
