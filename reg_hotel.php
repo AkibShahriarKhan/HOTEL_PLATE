@@ -98,6 +98,18 @@
           display: inline-block;
           float: left;
         }
+        select{
+          border-radius: 0px;
+          border: none;
+          text-align: center;
+          padding: 5px;
+          margin-top: 10px;
+          margin-left: -10px;
+          margin-bottom: 10px;
+          width: 300px;
+          display: inline-block;
+          float: left;
+        }
 
         form{
           float:left;
@@ -157,11 +169,19 @@
   </ul>
 
     <form class="container" action = "<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method = "post">
+      <label>City:</label>
+      <select name = "city">
+        <option value=" "> - </option>
+        <option value="dhaka">Dhaka</option>
+        <option value="rajshahi">chittagong</option>
+        <option value="sylhet">sylhet</option>
+      </select>
+
       <label>Hotel Name </label>
       <input type="text" name = "name" placeholder="Hotel Name" required/>
       <label>Address </label>
       <input type="text" name = "address" placeholder="Address" required/>
-	  <label>Phone No.</label>
+	     <label>Phone No.</label>
       <input type="text" name = "phone" placeholder="ex: 01710XXXXXX" required/>
 
 
@@ -187,7 +207,7 @@
  $password = "";
  $dbname = "wtproject";
 
- 
+
 
 
  // Create connection
@@ -210,18 +230,19 @@
 
      if($_SERVER['REQUEST_METHOD']=='POST')
      {
+      $city = purify($_POST['city']);
       $name = purify($_POST['name']);
       $address = purify($_POST['address']);
       $phone = purify($_POST['phone']);
       $TIN = purify($_POST['TIN']);
       $photo = purify($_POST['fileToUpload']);
- 
+
      }
-     
 
 
- $sql = "INSERT INTO hotel_info (h_name,h_address, h_phone, h_TIN, h_photo)
- VALUES ('$name', '$address', '$phone', '$TIN', '$photo')";
+
+ $sql = "INSERT INTO hotel_info (d_name,h_name,h_address, h_phone, h_TIN, h_photo)
+ VALUES ('$city','$name', '$address', '$phone', '$TIN', '$photo')";
 
 
  if ($conn->query($sql) === TRUE) {

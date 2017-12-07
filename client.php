@@ -1,14 +1,7 @@
 <?php
     session_start();
-    $bal=$_SESSION['usr'];
+    $usr=$_SESSION['usr'];
     ?>
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 
@@ -158,51 +151,51 @@
     li a:hover:not(.active){
       background-color:#D6EAF8;    }
 
-	.aCust{
-		color:blue;
-		font-size:8;
-	}
+    	.aCust{
+    		color:blue;
+    		font-size:8;
+    	}
 
-    footer{
-      text-align: center;
-      position: fixed;
-      left: 45%;
-      bottom: 0%;    }
+        footer{
+          text-align: center;
+          position: fixed;
+          left: 45%;
+          bottom: 0%;    }
 
-    .tableC{
-      opacity: 0.8;
-      display: inline-block;
-      float: left;
-      text-align: center;
-      margin-top: 2%;
-      margin-left: 2%;
-      margin-right: 2%;
-      padding: 1% 1% 1% 1%;
-      background-color:#D6EAF8;
-      text-transform: uppercase;
-      font-family: calibri;
-      font-weight: lighter;    }
+        .tableC{
+          opacity: 0.8;
+          display: inline-block;
+          float: left;
+          text-align: center;
+          margin-top: 2%;
+          margin-left: 2%;
+          margin-right: 2%;
+          padding: 1% 1% 1% 1%;
+          background-color:#D6EAF8;
+          text-transform: uppercase;
+          font-family: calibri;
+          font-weight: lighter;    }
 
-    .tableC2{
-      position: fixed;
-      opacity: 0.8;
-      margin-top: 7.8%;
-      margin-left: 8.5%;
-      padding: 2% 2% 2% 2%;
-      background-color:#D6EAF8;
-      display: inline-block;
-      width: 25%;    }
-
-
+        .tableC2{
+          position: fixed;
+          opacity: 0.8;
+          margin-top: 7.8%;
+          margin-left: 8.5%;
+          padding: 2% 2% 2% 2%;
+          background-color:#D6EAF8;
+          display: inline-block;
+          width: 25%;    }
 
 
 
-}
 
-    label{
-      text-transform: uppercase;
-      font-family: calibri;
-      font-weight: lighter;    }
+
+
+
+        label{
+          text-transform: uppercase;
+          font-family: calibri;
+          font-weight: lighter;    }
 
   </style>
 
@@ -234,7 +227,7 @@
   }
 
 
-  $sql = "SELECT c_name,c_email, c_pass, c_gender, c_phone, c_age, c_occupation, c_photo FROM client WHERE c_email='$bal'";
+  $sql = "SELECT c_name,c_email, c_pass, c_gender, c_phone, c_age, c_occupation, c_photo FROM client WHERE c_email='$usr'";
   $result = $conn->query($sql);
 
 
@@ -286,30 +279,6 @@
   echo "0 results";
   }
 ?>
-
-
-  <!--<form class="container2" action = "<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method = "post">
-    <label>First Name </label>
-    <input type="text" name = "fn" placeholder="<?php $c_name=$_SESSION['name']; echo $c_name;?>" required/><br><br>
-    <label>Email </label>
-    <input type="email" name = "mail" placeholder="<?php $c_email=$_SESSION['usr']; echo $c_email;?>" required/><br><br>
-    <label>phone </label>
-    <input type="text" name = "m" placeholder="ex: 01710XXXXXX" required/><br><br>
-    <label>National ID </label>
-    <input type = "text" name = "nid" placeholder="NID" required/><br><br>
-    <label>user name</label>
-    <input type="text" name = "u" placeholder="User Name" required/><br><br>
-    <label>password</label>
-    <input type="password" name = "p" placeholder="Password" required/><br><br>
-    <input class = "btn" style = "width: 165px; margin-left: 215px" type = "submit" value = "Register">
-  </form>
-
-
-
-  <form style = "position: fixed; margin-left: 85%;" action  = "chk.php" method = "post">
-    <input type="hidden" name = "chk" value = "1">
-    <input class = "btn" type = "submit" name = "ch" value = "Checkout">
-  </form>-->
 
 
 

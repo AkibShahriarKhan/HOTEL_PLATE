@@ -176,82 +176,19 @@
     <li><a href="agent.php"><?php echo $_SESSION['usr']; ?></a></li>
     <li style="margin-top:00px;"><a class = "active" href="agent_home.php">Home</a></li>
   </ul>
-  <?php //echo "<wl>Welcome, ".$_SESSION['usr']."</wl>"; ?>
-
-
-
-
-
 
   <form style = "position: fixed; margin-left: 85%;" action  = "chk.php" method = "post">
     <input type="hidden" name = "chk" value = "1">
     <input class = "btn" type = "submit" name = "ch" value = "Checkout">
   </form>
 
-  <table class = "tableC" style = "margin-left:1PX;">
-    <tr>
-      <th> HOTEL 1 </th>
-      <th> HOTEL 2 </th>
-      <th> HOTEL 3 </th>
-    </tr>
-    <tr>
-
-      <td style = "border: 2px solid grey;" >
+  
 
 
-        <form action = "add.php" method="post">
-
-          <label>Room ID:</label><br>
-
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: -10px; margin-left: -120px" type = "text" name = "id" value = "R1" readonly><img src="img/r1.jpg" style="width:200px; height:auto; alt="h1">
-          <label>Price($): </label><br>
-
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: 10px; margin-left: -120px" type = "text" name = "price" value = "200" readonly>
-          <label>Room Quantity: </label>
-          <input style = "width:40px; margin-top: 50px; margin-left: -120px;" type = "text" name = "Quan">
-          <input type = "submit" value = "Book">
-
-        </form>
-      </td>
 
 
-    <!--  <td style = "border: 2px solid grey;">
-
-        <form action = "add.php?>" method="post">
-          <label>Room ID:</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: -10px; margin-left: -120px" type = "text" name = "id" value = "R2" readonly><img src="img/r2.jpg" style="width:200px; height:auto; alt="h2">
-          <label>Price($):</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: 10px; margin-left: -120px" type = "text" name = "price" value = "200" readonly>
-          <label>Room Quantity:</label>
-          <input style = "width:40px; margin-top: 50px; margin-left: -120px;" type = "text" name = "Quan">
-          <input type = "submit" value = "Book">
-        </form>
-      </td>-->
-
-
-      <td style = "border: 2px solid grey;">
-
-        <form action = "add.php?>" method="post">
-          <label>Room ID:</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: -10px; margin-left: -120px" type = "text" name = "id" value = "R3" readonly><img src="img/r3.jpg" style="width:200px; height:auto; alt="h3">
-          <label>Price($):</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: 10px; margin-left: -120px" type = "text" name = "price" value = "200" readonly>
-          <label>Room Quantity:</label>
-          <input style = "width:40px; margin-top: 50px; margin-left: -120px;" type = "text" name = "Quan">
-          <input type = "submit" value = "Book">
-        </form>
-      </td>
-
-  </table>
-
-  <table class = "tableC2">
-    <tr>
-      <th>ROOM</th>
-      <th>Quantity</th>
-      <th>Price</th>
-    </tr>
     <?php
-      if(isset($_SESSION['arr']) && !empty($_SESSION['arr']))
+    /*  if(isset($_SESSION['arr']) && !empty($_SESSION['arr']))
       {
         $temp = 0;
         $arr1 = $_SESSION['arr'];
@@ -267,9 +204,9 @@
           echo "<tr style = 'text-align:center'><td>Total</td> <td> </td> <td>".$temp."</td></tr>";
           $_SESSION['total'] = $temp;
         }
-      }
+      }*/
     ?>
-  </table><br>
+
 
 <footer style = "font-family:calibri; letter-spacing:2px; background: orange; text-transform: uppercase;"> Copyright &copy 2018 </footer>
 </body>
