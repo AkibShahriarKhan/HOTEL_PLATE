@@ -158,10 +158,10 @@
     li a:hover:not(.active){
       background-color:#D6EAF8;    }
 
-	.aCust{
-		color:blue;
-		font-size:8;
-	}
+    .aCust{
+      color:blue;
+      font-size:8;
+    }
 
     footer{
       text-align: center;
@@ -191,19 +191,21 @@
       padding: 2% 2% 2% 2%;
       background-color:#D6EAF8;
       display: inline-block;
-      width: 25%;    }
-
-
-
-
-
-}
-
+      width: 25%;    
+      }
     label{
       text-transform: uppercase;
       font-family: calibri;
-      font-weight: lighter;    }
-
+      font-weight: lighter;    
+    }
+    
+    #redirectBtn{
+      width: 15%;
+      padding:10px;
+      margin:20px;
+      background-color: red;
+    }
+  
   </style>
 
 </head>
@@ -219,8 +221,8 @@
     <li><a href="agent.php"><?php echo $_SESSION['usr']; ?></a></li>
     <li style="margin-top:00px;"><a class = "active" href="agent_home.php">Home</a></li>
   </ul>
-  
-  <a href="reg_hotel.php">Register Hotels</a>
+
+  <a id="redirectBtn" href="reg_hotel.php">Register Hotels</a>
 
 
 <?php

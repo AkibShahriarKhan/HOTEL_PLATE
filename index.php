@@ -161,103 +161,92 @@
 
 
 <?php
-  
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "wtproject";
-  
-  function purify($data)
-  {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-
-    return $data;
-  }
-
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-  if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-  }
-  
-  if($_SERVER['REQUEST_METHOD'] == 'POST')
-  {
-    $usrName = purify($_POST['usr']);
-    $pas = purify($_POST['pass']);    
-
-    $sql = "SELECT c_email, c_pass FROM client";
-    $result = $conn->query($sql);
-    
-    $_sql = "SELECT a_email, a_pass FROM agent";
-    $_result = $conn->query($_sql);
-
-    if ($result->num_rows > 0) {
-      //output data of each row
-      while($row = $result->fetch_assoc()) {
-        //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-        if(!empty($row["c_email"]))
-        {
-          if(trim($row["c_email"]) == $usrName)
-          {
-            $flag = true;
-            if(trim($row["c_pass"]) == $pas)
-            {
+$servername = "localhost";
+			$username = "root";
+			$password = "";
+			$dbname = "wtproject";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+      function purify($data)
+      {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+      }
+      $usrName = purify($_POST['usr']);
+      $pas = purify($_POST['pass']);
+	$sql = "SELECT c_email, c_pass FROM client";
+	$result = $conn->query($sql);
+	
+	$_sql = "SELECT a_email, a_pass FROM agent";
+	$_result = $conn->query($_sql);
+	if ($result->num_rows > 0) {
+		//output data of each row
+		while($row = $result->fetch_assoc()) {
+			//echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+			if(!empty($row["c_email"]))
+    		{
+    			if(trim($row["c_email"]) == $usrName)
+    			{
+    				$flag = true;
+    				if(trim($row["c_pass"]) == $pas)
+    				{
               $_SESSION['usr'] = $usrName;
-              echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
+    					echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
               header("location:home.php");
+              exit;
               break;
-
-            }
-            else
-            {
-              echo "<center>Password doesn't match!<br><center>";
-              break;
-            }
-          }
-        }
-
-      }
-    } 
-    else {
-      echo "0 results";
+    				}
+    				else
+    				{
+    					echo "<center>Password doesn't match!<br><center>";
+    					break;
+    				}
+    			}
+    		}
+		}
+	} 
+	else {
+		echo "0 results";
+	}
+	 if($_result->num_rows > 0){
+			if ($_result->num_rows > 0) {
+		// output data of each row
+		while($_row = $_result->fetch_assoc()) {
+			//echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+			if(!empty($_row["a_email"]))
+    		{
+    			if(trim($_row["a_email"]) == $usrName)
+    			{
+    				$flag = true;
+    				if(trim($_row["a_pass"]) == $pas)
+    				{
+						//echo "Done";
+              $_SESSION['usr'] = $usrName;
+    					echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
+              header("location:agent_home.php");
+    					break;
+    				}
+    				else
+    				{
+    					echo "<center>Password doesn't match!<br><center>";
+    					break;
+    				}
+    			}
+    		}
+		}
+	}
+		
+	}
+	else {
+		echo "0 results";
+	}
     }
-    if($_result->num_rows > 0){
-        if ($_result->num_rows > 0) {
-      // output data of each row
-      while($_row = $_result->fetch_assoc()) {
-        //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-        if(!empty($_row["a_email"]))
-          {
-            if(trim($_row["a_email"]) == $usrName)
-            {
-              $flag = true;
-              if(trim($_row["a_pass"]) == $pas)
-              {
-              //echo "Done";
-                $_SESSION['usr'] = $usrName;
-                echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
-                header("location:agent_home.php");
-                break;
-
-              }
-              else
-              {
-                echo "<center>Password doesn't match!<br><center>";
-                break;
-              }
-            }
-          }
-
-      }
-    }
-      
-    }
-    else {
-      echo "0 results";
-    }
-
-    }
-?>
+ ?>
