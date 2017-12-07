@@ -91,8 +91,8 @@
       text-decoration: none;
       text-align: center;
       margin:0% 7.5% 0% 0%;
-    }   
-    
+    }
+
     .slideShowBox{
       width: 60%;
       background-color: red;
@@ -103,12 +103,12 @@
   <div id="backGroundImage"></div>
 
   <header> sala_dia_dhaka <button id="logSignBtn" style="float:right;" onclick="showLoginSignup(1)">Login/Signup</button> </header>
-  
+
   <div class="searchBox">
         <input class="inpText"type="text" maxlength="200" name="searchQuerry" placeholder="Search Location">
         <input class="inpBtn" type="Submit" value="Search">
   </div>
-  
+
   <center>
     <div id="logSignOverly"></div>
     <div id="logSign">
@@ -125,7 +125,7 @@
       <button style="margin:10px 0px 0px 0px;" onclick="showLoginSignup(0)">Cancel</button>
     </div>
   </center>
-  
+
   <div class="slideShowBox">
     <img>
     <h2></h2>
@@ -195,7 +195,7 @@ if ($conn->connect_error) {
 
 	$sql = "SELECT c_email, c_pass FROM client";
 	$result = $conn->query($sql);
-	
+
 	$_sql = "SELECT a_email, a_pass FROM agent";
 	$_result = $conn->query($_sql);
 
@@ -225,11 +225,11 @@ if ($conn->connect_error) {
     		}
 
 		}
-	} 
+	}
 	else {
 		echo "0 results";
 	}
-	 if($_result->num_rows > 0){
+
 			if ($_result->num_rows > 0) {
 		// output data of each row
 		while($_row = $_result->fetch_assoc()) {
@@ -258,8 +258,8 @@ if ($conn->connect_error) {
 
 		}
 	}
-		
-	}
+
+
 	else {
 		echo "0 results";
 	}
