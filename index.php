@@ -1,14 +1,12 @@
 <?php
   session_start();
  ?>
-
 <!DOCTYPE html>
 <html>
 <head>
   <title> Welcome! </title>
 
   <style>
-	  <style>
     #backGroundImage{
       background-image: url('jjgres/photo_1.jpg');
       width:100%;
@@ -102,60 +100,60 @@
   </style>
 </head>
 <body onresize="update()">
-<div id="backGroundImage"></div>
+  <div id="backGroundImage"></div>
 
-<header> sala_dia_dhaka <button id="logSignBtn" style="float:right;" onclick="showLoginSignup(1)">Login/Signup</button> </header>
-
-<div class="searchBox">
-      <input class="inpText"type="text" maxlength="200" name="searchQuerry" placeholder="Search Location">
-      <input class="inpBtn" type="Submit" value="Search">
-</div>
-
-<center>
-  <div id="logSignOverly"></div>
-  <div id="logSign">
-    <form action="index.php" method = "post">
-      <input type = "text" name = "usr" placeholder="User Name" required/><br>
-      <input type="password" name="pass" placeholder="Password" required/><br>
-      <input style="border: 2px solid #ffcc99;" type = "submit" value = "LOGIN"/><br>
-      <a href="#">Forgot Password?</a><br>
-    </form>
-
-    <form action="reg.php">
-      <input style="border: 2px solid #ffcc99;" type = "submit" value = "SIGN UP"/>
-    </form>
-    <button style="margin:10px 0px 0px 0px;" onclick="showLoginSignup(0)">Cancel</button>
+  <header> sala_dia_dhaka <button id="logSignBtn" style="float:right;" onclick="showLoginSignup(1)">Login/Signup</button> </header>
+  
+  <div class="searchBox">
+        <input class="inpText"type="text" maxlength="200" name="searchQuerry" placeholder="Search Location">
+        <input class="inpBtn" type="Submit" value="Search">
   </div>
-</center>
+  
+  <center>
+    <div id="logSignOverly"></div>
+    <div id="logSign">
+      <form action="index.php" method = "post">
+        <input type = "text" name = "usr" placeholder="User Name" required/><br>
+        <input type="password" name="pass" placeholder="Password" required/><br>
+        <input style="border: 2px solid #ffcc99;" type = "submit" value = "LOGIN"/><br>
+        <a href="#">Forgot Password?</a><br>
+      </form>
 
-<div class="slideShowBox">
-  <img>
-  <h2></h2>
-</div>
+      <form action="reg.php">
+        <input style="border: 2px solid #ffcc99;" type = "submit" value = "SIGN UP"/>
+      </form>
+      <button style="margin:10px 0px 0px 0px;" onclick="showLoginSignup(0)">Cancel</button>
+    </div>
+  </center>
+  
+  <div class="slideShowBox">
+    <img>
+    <h2></h2>
+  </div>
 
-<script>
-    var divblock = document.getElementById('backGroundImage');
-    var he = window.innerHeight;
+  <script>
+      var divblock = document.getElementById('backGroundImage');
+      var he = window.innerHeight;
 
-    function setImageSize(h){
-      divblock.style.height=h+"px";
-    }
-    function update(){
-      he = window.innerHeight;
+      function setImageSize(h){
+        divblock.style.height=h+"px";
+      }
+      function update(){
+        he = window.innerHeight;
+        setImageSize(he);
+      }
+      function showLoginSignup(x){
+          if(x==1){
+            document.getElementById('logSign').style.display = "block";
+            document.getElementById('logSignOverly').style.display = "block";
+          }
+          else{
+            document.getElementById('logSign').style.display = "none";
+            document.getElementById('logSignOverly').style.display = "none";
+          }
+      }
       setImageSize(he);
-    }
-    function showLoginSignup(x){
-        if(x==1){
-          document.getElementById('logSign').style.display = "block";
-          document.getElementById('logSignOverly').style.display = "block";
-        }
-        else{
-          document.getElementById('logSign').style.display = "none";
-          document.getElementById('logSignOverly').style.display = "none";
-        }
-    }
-    setImageSize(he);
-</script>
+  </script>
 </body>
 </html>
 
