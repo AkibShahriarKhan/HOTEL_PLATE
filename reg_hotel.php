@@ -208,12 +208,16 @@
        return $data;
      }
 
-     $name = purify($_POST['name']);
-     $address = purify($_POST['address']);
-     $phone = purify($_POST['phone']);
-     $TIN = purify($_POST['TIN']);
-     $photo = purify($_POST['fileToUpload']);
-
+     if($_SERVER['REQUEST_METHOD']=='POST')
+     {
+      $name = purify($_POST['name']);
+      $address = purify($_POST['address']);
+      $phone = purify($_POST['phone']);
+      $TIN = purify($_POST['TIN']);
+      $photo = purify($_POST['fileToUpload']);
+ 
+     }
+     
 
 
  $sql = "INSERT INTO hotel_info (h_name,h_address, h_phone, h_TIN, h_photo)
