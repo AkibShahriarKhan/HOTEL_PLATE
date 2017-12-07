@@ -5,6 +5,7 @@ jjgres
 
 #vscode internal file
 *.code-workspace
+.vscode
 
 # Windows image file caches
 Thumbs.db
