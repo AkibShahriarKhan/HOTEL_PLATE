@@ -163,13 +163,13 @@
       <input type="email" name = "mail" placeholder="ex: someone@domain.com" required/>
 	  <label>password</label>
       <input type="password" name = "pass" placeholder="Password" required/>
-	  
+
 	  <!--
       <label for="gender">Gender</label>
 	  <input type="radio" name="gender" value="male" checked="checked">Male
 	  <input type="radio" name="gender" value="female">Female
 	  -->
-	  
+
 	  <label>Phone </label>
       <input type="text" name = "phone" placeholder="ex: 01710XXXXXX" required/>
       <label>Age</label>
@@ -180,7 +180,7 @@
 	  <input type="text" name = "agent_id" placeholder="Your Agent ID" required/>
 	  <label>Photo</label>
 	  <input type="file" name="fileToUpload" id="fileToUpload">
-      
+
       <input class = "btn" style = "width: 165px; margin-left: 215px" type = "submit" value = "Register">
 
 	   <?php
@@ -213,17 +213,18 @@
           $pass = purify($_POST['pass']);
           $age = purify($_POST['age']);
           $position = purify($_POST['position']);
-		  $agent_id = purify($_POST['agent_id']);
-		  $photo = purify($_POST['fileToUpload']);
+		      $agent_id = purify($_POST['agent_id']);
+		      $photo = purify($_POST['fileToUpload']);
 
 
 
-		  $sql = "INSERT INTO agent (a_name, a_email, a_pass, a_gender, a_phone, a_age, a_position, a_photo, a_id)
-			VALUES ('$name', '$email', '$pass', '$phone', '$age', '$position', '$agent_id', '$photo', '$agent_id')";
+		  $sql = "INSERT INTO agent (a_name, a_email, a_pass, a_phone, a_age, a_position, a_photo, a_id)
+			VALUES ('$name', '$email', '$pass', '$phone', '$age', '$position', '$photo', '$agent_id')";
 
 
 		  if ($conn->query($sql) === TRUE) {
-				//echo "New record created successfully";
+
+				echo "<script type='text/javascript'>alert('Successfully Register!')</script>";
 			} else {
 				echo "Error: " . $sql . "<br>" . $conn->error;
 			}
