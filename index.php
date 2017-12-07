@@ -8,120 +8,16 @@
   <title> Welcome! </title>
 
   <style>
-	.searchBox{
-		
-	}
-	.inpText{
-		width: 50%;
-		margin: 0% 0% 0% 15%;
-	}
-	.inpBtn{
-	  width: 20%;
-	  background-color: green;
-      padding: 11px 32px;
-      color: white;
-      border: none;
-      text-decoration: none;
-      text-align: center;
-	}
-    .btnLogin{
-      background-color: green;
-      padding: 15px 32px;
-      color: white;
-      border: none;
-      text-decoration: none;
-      text-align: center;
-      width: 165px;
-    }
-    .btnSign{
-      background-color: red;
-      padding: 15px 32px;
-      color: white;
-      border: none;
-      text-decoration: none;
-      text-align: center;
-      width: 165px;
-    }
-
-    .btn:hover{
-      background-color: #00cc00;
-    }
-    .btn2:hover{
-      background-color: #00cc00;
-    }
-
-    input[type = text], select{
-      border-radius: 0px;
-      border: 1px solid #ff8000;
-      text-align: center;
-      padding: 10px;
-      margin-top: 40px;
-      margin-bottom: 40px;
-    }
-
-    input[type = password], select{
-      border-radius: 0px;
-      border: 1px solid #ff8000;
-      text-align: center;
-      padding: 10px;
-      margin-top: 40px;
-    }
-
-    .a1{
-      text-decoration: none;
-      color: black;
-    }
-    a:hover{
-      background-color: orange;
-    }
-
-    ul {
-      font-family: calibri;
-      letter-spacing: 2px;
-      text-align: center;
-      list-style-type: none;
-      margin-top: 180px;
-      padding: 0;
-      width: 12%;
-      background-color: #ffcc99;
+    #backGroundImage{
+      background-image: url('jjgres/photo_1.jpg');
+      width:100%;
+      background-size:cover;
       position: fixed;
-      height: 47%;
-      border-radius: 4px 4px;
-      overflow: auto;
+      left:0;
+      top:0;
+      z-index: -1;
+      filter: blur(3px);
     }
-
-    li a{
-      display: block;
-      color: black;
-      background-color:  #ffcc99;
-      padding: 10px 16px;
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-
-    li a.active{
-      background-color: green;
-      color: white;
-    }
-
-    li a.active:hover{
-      background-color: #00cc00;
-    }
-
-    li a:hover:not(.active){
-      background-color: #cc7a00;
-    }
-
-    div {
-      opacity: 0.8;
-      border-radius: 4px;
-      background-color: #ffcc99;
-      margin:10px;
-      padding: 20px;
-
-    }
-
-
 
     header{
       padding: 20px;
@@ -136,170 +32,232 @@
       background-color:#2ECC71;
     }
 
-    body {
-      background-image: url("img/20.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-
-    label {
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      border: 2px solid;
-      padding: 10px;
-      border-color: #cc7a00;
-      font-family: calibri;
-      font-weight: lighter;
-      color: black;
-    }
-
-    footer{
+    #logSignBtn{
+      width: 10%;
+      background-color: green;
+      padding: 12px 0px;
+      color: white;
+      border: none;
       text-align: center;
-      position: fixed;
-      left: 45%;
-      bottom: 0%;
+    }
+    #logSignOverly{
+      display:none;
+      position:fixed;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
+      background-color: black;
+      opacity:0.7;
+      z-index:2;
+    }
+    #logSign{
+        position: absolute;
+        top:35%;
+        left:40%;
+        display: none;
+        z-index:3;
+        width: 20%;
+        padding:10px 0px;
+        background-color: rgba(123,123,123,0.3);
+    }
+    #logSign input{
+      width:80%;
+      padding:10px 0px;
+      margin: 10px 0px 0px 0px;
+      text-align:center;
     }
 
+    .searchBox{
+      width:60%;
+      margin:2% 20% 0% 20%;
+      border-radius: 8px;
+      /*border: 1px solid #ff8000;*/
+      text-align: center;
+      padding:10px;
+      box-shadow: 0px 8px 8px -4px rgba(0, 0, 0, 0.2), 0px -8px 8px -4px rgba(0, 0, 0, 0.2);
+    }
+    .inpText{
+      width: 50%;
+      margin: 0% 0% 0% 7.5%;
+      text-align: center;
+      padding: 10px 0px 10px 0px;
+    }
+    .inpBtn{
+      width: 15%;
+      background-color: green;
+      padding: 12px 0px 12px 0px;
+      color: white;
+      border: none;
+      text-decoration: none;
+      text-align: center;
+      margin:0% 7.5% 0% 0%;
+    }   
+    
+    .slideShowBox{
+      width:40%;
+      margin:5% 30% 0% 30%;
+      background-color: red;
+    }
   </style>
+
 </head>
-<body>
+<body onresize="update()">
+  <div id="backGroundImage"></div>
 
-<header> sala_dia_dhaka </header>
-<div class="searchBox">
-	<input class="inpText"type="text" maxlength="200" name="searchQuerry">
-	<input class="inpBtn" type="Submit" value="Search">
-</div>
-<div>
-<center><form action="index.php" method = "post">
+  <header> sala_dia_dhaka <button id="logSignBtn" style="float:right;" onclick="showLoginSignup(1)">Login/Signup</button> </header>
+  
+  <div class="searchBox">
+        <input class="inpText"type="text" maxlength="200" name="searchQuerry" placeholder="Search Location">
+        <input class="inpBtn" type="Submit" value="Search">
+  </div>
+  
+  <center>
+    <div id="logSignOverly"></div>
+    <div id="logSign">
+      <form action="index.php" method = "post">
+        <input type = "text" name = "usr" placeholder="User Name" required/><br>
+        <input type="password" name="pass" placeholder="Password" required/><br>
+        <input style="border: 2px solid #ffcc99;" type = "submit" value = "LOGIN"/><br>
+        <a href="#">Forgot Password?</a><br>
+      </form>
 
-  <input type = "text" name = "usr" placeholder="User Name" required/>
-  <input type="password" name="pass" placeholder="Password" required/><br><br>
-  <input class = "btnLogin" type = "submit" value = "LOGIN"/>
-</form></center>
+      <form action="reg.php">
+        <input style="border: 2px solid #ffcc99;" type = "submit" value = "SIGN UP"/>
+      </form>
+      <button style="margin:10px 0px 0px 0px;" onclick="showLoginSignup(0)">Cancel</button>
+    </div>
+  </center>
+  
+  <div class="slideShowBox">
+    <h2>Insert Slide Show Here</h2>
+  </div>
 
-<!--<br><center><a href = "reg.php"> Create New Account </a></center>-->
-<center><form action="reg.php">
-  <input class = "btnSign" type = "submit" value = "SIGN UP"/>
-</form></center>
+  <script>
+      var divblock = document.getElementById('backGroundImage');
+      var he = window.innerHeight;
 
-
-
-
-
-
-
-<footer style = "font-family:calibri; letter-spacing:2px; background: orange; text-transform: uppercase;"> Copyright &copy 2018 </footer>
+      function setImageSize(h){
+        divblock.style.height=h+"px";
+      }
+      function update(){
+        he = window.innerHeight;
+        setImageSize(he);
+      }
+      function showLoginSignup(x){
+          if(x==1){
+            document.getElementById('logSign').style.display = "block";
+            document.getElementById('logSignOverly').style.display = "block";
+          }
+          else{
+            document.getElementById('logSign').style.display = "none";
+            document.getElementById('logSignOverly').style.display = "none";
+          }
+      }
+      setImageSize(he);
+  </script>
 </body>
 </html>
 
 
 <?php
+  
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "wtproject";
+  
+  function purify($data)
+  {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
 
+    return $data;
+  }
 
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
+  
+  if($_SERVER['REQUEST_METHOD'] == 'POST')
+  {
+    $usrName = purify($_POST['usr']);
+    $pas = purify($_POST['pass']);    
 
+    $sql = "SELECT c_email, c_pass FROM client";
+    $result = $conn->query($sql);
+    
+    $_sql = "SELECT a_email, a_pass FROM agent";
+    $_result = $conn->query($_sql);
 
-
-$servername = "localhost";
-			$username = "root";
-			$password = "";
-			$dbname = "wtproject";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
-
-    if($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-      function purify($data)
-      {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-
-        return $data;
-      }
-
-      $usrName = purify($_POST['usr']);
-      $pas = purify($_POST['pass']);
-
-
-	$sql = "SELECT c_email, c_pass FROM client";
-	$result = $conn->query($sql);
-	
-	$_sql = "SELECT a_email, a_pass FROM agent";
-	$_result = $conn->query($_sql);
-
-	if ($result->num_rows > 0) {
-		//output data of each row
-		while($row = $result->fetch_assoc()) {
-			//echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-			if(!empty($row["c_email"]))
-    		{
-    			if(trim($row["c_email"]) == $usrName)
-    			{
-    				$flag = true;
-    				if(trim($row["c_pass"]) == $pas)
-    				{
+    if ($result->num_rows > 0) {
+      //output data of each row
+      while($row = $result->fetch_assoc()) {
+        //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+        if(!empty($row["c_email"]))
+        {
+          if(trim($row["c_email"]) == $usrName)
+          {
+            $flag = true;
+            if(trim($row["c_pass"]) == $pas)
+            {
               $_SESSION['usr'] = $usrName;
-    					echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
+              echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
               header("location:home.php");
-    					break;
+              break;
 
-    				}
-    				else
-    				{
-    					echo "<center>Password doesn't match!<br><center>";
-    					break;
-    				}
-    			}
-    		}
+            }
+            else
+            {
+              echo "<center>Password doesn't match!<br><center>";
+              break;
+            }
+          }
+        }
 
-		}
-	} 
-	else {
-		echo "0 results";
-	}
-	 if($_result->num_rows > 0){
-			if ($_result->num_rows > 0) {
-		// output data of each row
-		while($_row = $_result->fetch_assoc()) {
-			//echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-			if(!empty($_row["a_email"]))
-    		{
-    			if(trim($_row["a_email"]) == $usrName)
-    			{
-    				$flag = true;
-    				if(trim($_row["a_pass"]) == $pas)
-    				{
-						//echo "Done";
-              $_SESSION['usr'] = $usrName;
-    					echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
-              header("location:agent_home.php");
-    					break;
+      }
+    } 
+    else {
+      echo "0 results";
+    }
+    if($_result->num_rows > 0){
+        if ($_result->num_rows > 0) {
+      // output data of each row
+      while($_row = $_result->fetch_assoc()) {
+        //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+        if(!empty($_row["a_email"]))
+          {
+            if(trim($_row["a_email"]) == $usrName)
+            {
+              $flag = true;
+              if(trim($_row["a_pass"]) == $pas)
+              {
+              //echo "Done";
+                $_SESSION['usr'] = $usrName;
+                echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
+                header("location:agent_home.php");
+                break;
 
-    				}
-    				else
-    				{
-    					echo "<center>Password doesn't match!<br><center>";
-    					break;
-    				}
-    			}
-    		}
+              }
+              else
+              {
+                echo "<center>Password doesn't match!<br><center>";
+                break;
+              }
+            }
+          }
 
-		}
-	}
-		
-	}
-	else {
-		echo "0 results";
-	}
+      }
+    }
+      
+    }
+    else {
+      echo "0 results";
+    }
 
     }
- ?>
+?>
