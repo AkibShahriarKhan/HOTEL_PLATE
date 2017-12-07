@@ -1,3 +1,11 @@
+#user specific ignore file
+    #joy
+jjgtest.php
+jjgres
+
+#vscode internal file
+*.code-workspace
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
