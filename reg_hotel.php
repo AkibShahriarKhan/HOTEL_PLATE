@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title> Registration </title>
+  <title> Agent Hotel Registration </title>
 
   <style>
         header
@@ -157,73 +157,78 @@
   </ul>
 
     <form class="container" action = "<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method = "post">
-      <label>First Name </label>
-      <input type="text" name = "fn" placeholder="Your Name" required/>
-      <label>Email </label>
-      <input type="email" name = "mail" placeholder="ex: someone@domain.com" required/>
-    <!--  <label>phone </label>
-      <input type="text" name = "m" placeholder="ex: 01710XXXXXX" required/>
-      <label>National ID </label>
-      <input type = "text" name = "nid" placeholder="NID" required/>
-      <label>user name</label>
-      <input type="text" name = "u" placeholder="User Name" required/>-->
-      <label>password</label>
-      <input type="password" name = "p" placeholder="Password" required/>
+      <label>Hotel Name </label>
+      <input type="text" name = "name" placeholder="Hotel Name" required/>
+      <label>Address </label>
+      <input type="text" name = "address" placeholder="Address" required/>
+	  <label>Phone No.</label>
+      <input type="text" name = "phone" placeholder="ex: 01710XXXXXX" required/>
+
+
+      <label>TIN No.</label>
+      <input type="text" name = "TIN" placeholder="TIN Number" required/>
+
+	  <label>Photo</label>
+	  <input type="file" name="fileToUpload" id="fileToUpload">
+
       <input class = "btn" style = "width: 165px; margin-left: 215px" type = "submit" value = "Register">
-	  <a href="agent_reg.php">Register as An Agent?</a>
-
-	   <?php
-			$servername = "localhost";
-			$username = "root";
-			$password = "";
-			$dbname = "wtproject";
-
-			// Create connection
-			$conn = new mysqli($servername, $username, $password, $dbname);
-			// Check connection
-			if ($conn->connect_error) {
-				die("Connection failed: " . $conn->connect_error);
-			}
-
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-          function purify($data)
-          {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-
-            return $data;
-          }
-
-          $fname = purify($_POST['fn']);
-          $email = purify($_POST['mail']);
-          //$mobile = purify($_POST['m']);
-          //$usr = purify($_POST['u']);
-          $pass = purify($_POST['p']);
-          //$id = purify($_POST['nid']);
 
 
-
-		  $sql = "INSERT INTO client (c_name,c_email,c_pass)
-			VALUES ('$fname', '$email', '$pass'  )";
-
-
-		  if ($conn->query($sql) === TRUE) {
-				echo "New record created successfully";
-			} else {
-				echo "Error: " . $sql . "<br>" . $conn->error;
-			}
-
-			$conn->close();
-
-		}
-
-        ?>
-		
     </form>
 
 <footer style = "font-family:calibri; letter-spacing:2px; background: orange; text-transform: uppercase;"> Copyright &copy 2018 </footer>
 </body>
 
 </html>
+
+<?php
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ $dbname = "wtproject";
+
+ 
+
+
+ // Create connection
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ // Check connection
+ if ($conn->connect_error) {
+   die("Connection failed: " . $conn->connect_error);
+ }
+
+   if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+     function purify($data)
+     {
+       $data = trim($data);
+       $data = stripslashes($data);
+       $data = htmlspecialchars($data);
+
+       return $data;
+     }
+
+     $name = purify($_POST['name']);
+     $address = purify($_POST['address']);
+     $phone = purify($_POST['phone']);
+     $TIN = purify($_POST['TIN']);
+     $photo = purify($_POST['fileToUpload']);
+
+
+
+ $sql = "INSERT INTO hotel_info (h_name,h_address, h_phone, h_TIN, h_photo)
+ VALUES ('$name', '$address', '$phone', '$TIN', '$photo')";
+
+
+ if ($conn->query($sql) === TRUE) {
+
+   echo "<script type='text/javascript'>alert('Successfully Register!')</script>";
+ } else {
+   echo "Error: " . $sql . "<br>" . $conn->error;
+ }
+
+ $conn->close();
+
+}
+
+   ?>

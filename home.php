@@ -178,16 +178,89 @@
   </ul>
   <?php //echo "<wl>Welcome, ".$_SESSION['usr']."</wl>"; ?>
 
-
-
-
-
-
   <form style = "position: fixed; margin-left: 85%;" action  = "chk.php" method = "post">
     <input type="hidden" name = "chk" value = "1">
     <input class = "btn" type = "submit" name = "ch" value = "Checkout">
   </form>
 
+
+  <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "wtproject";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+    }
+
+
+    $sql = "SELECT h_name,h_address, h_phone, h_TIN, a_id, h_photo FROM hotel_info";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+    echo "<table class='container' width:10%>";
+    if(!isset($_GET['edit']) || $_GET['edit'] == 'false')
+    {
+  	  while($row = $result->fetch_assoc()) {
+        $image_data = $row["h_photo"];
+        $image_name = $row["h_name"];
+        $encoded_image = base64_encode($image_data);
+        //You dont need to decode it again.
+
+        $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\">";
+
+  		echo "<tr><td>"."NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."ADDRESS:"."</td><td>".$row["h_address"]."</td><tr><td> "."PHONE"."</td><td>".$row["h_phone"]."</td><tr><td>"."TIN Number:"."</td><td>".$row["h_TIN"]."</td><tr><td>"."AGENT:"."</td><td>".$row["a_id"]."</td><tr><td>"."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
+
+    }
+    echo "</table>";
+    }
+    else if($_GET['edit'] == 'true')
+    {
+  	while($row = $result->fetch_assoc()) {
+
+  		echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]." <a class = 'aCust' style = 'font-size:8' href='client.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["c_name"]."</td></tr>";
+
+    }
+    echo "</table>";
+
+  	$_GET['edit'] == 'false';
+    }
+
+
+    }
+
+    else {
+    echo "0 results";
+    }
+  ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--
   <table class = "tableC" style = "margin-left:1PX;">
     <tr>
       <th> HOTEL 1 </th>
@@ -249,7 +322,11 @@
       <th>ROOM</th>
       <th>Quantity</th>
       <th>Price</th>
-    </tr>
+    </tr>-->
+
+
+
+
     <?php
       if(isset($_SESSION['arr']) && !empty($_SESSION['arr']))
       {
