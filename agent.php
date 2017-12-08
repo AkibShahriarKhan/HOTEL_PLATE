@@ -3,12 +3,6 @@
     $bal=$_SESSION['usr'];
     ?>
 
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 
@@ -68,9 +62,9 @@
         opacity: 0.8;
         border-radius: 4px;
         background-color: #F5B7B1;
-        margin-top: 4%;
+        margin-top: -5%;
         margin-left: 5%;
-        margin-right: 30%;
+        margin-right: 20%;
         padding: 20px;
         width: 600px;
 
@@ -113,7 +107,7 @@
         float: left;
       }
 
-    .btn{
+    .regbtn{
       background-color: red;
       padding: 15px 32px;
       color: white;
@@ -122,10 +116,11 @@
       text-transform: uppercase;
       font-weight: 500;
       text-align: center;
-      margin-left: 33%;
-      margin-top: 50px;    }
+      margin-left: 30%;
+      margin-top: 50px;
+        float:right;     }
 
-    .btn:hover{
+    .regbtn:hover{
       background-color: #00cc00;    }
 
     form{
@@ -161,7 +156,7 @@
 	.aCust{
 		color:blue;
 		font-size:8;
-	}
+	       }
 
     footer{
       text-align: center;
@@ -219,9 +214,12 @@
     <li><a href="agent.php"><?php echo $_SESSION['usr']; ?></a></li>
     <li style="margin-top:00px;"><a class = "active" href="agent_home.php">Home</a></li>
   </ul>
-  
-  <a href="reg_hotel.php">Register Hotels</a>
 
+<!--
+  <a href="reg_hotel.php">Register Hotels</a>
+-->
+
+  <button onclick="location.href = 'reg_hotel.php';" id="myButton" class="regbtn" >Register Hotel</button>
 
 <?php
   $servername = "localhost";
