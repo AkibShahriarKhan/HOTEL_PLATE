@@ -5,6 +5,7 @@
 <html>
 <head>
   <title> Welcome! </title>
+  <link rel="stylesheet" href="LoginPopUp/LoginPopUpCSS.css">
 
   <style>
     #backGroundImage{
@@ -29,42 +30,6 @@
       font-weight: lighter;
       font-size: 32px;
       background-color:#2ECC71;
-    }
-
-    #logSignBtn{
-      width: 10%;
-      background-color: green;
-      padding: 12px 0px;
-      color: white;
-      border: none;
-      text-align: center;
-    }
-    #logSignOverly{
-      display:none;
-      position:fixed;
-      left:0;
-      right:0;
-      top:0;
-      bottom:0;
-      background-color: black;
-      opacity:0.7;
-      z-index:2;
-    }
-    #logSign{
-        position: absolute;
-        top:35%;
-        left:40%;
-        display: none;
-        z-index:3;
-        width: 20%;
-        padding:10px 0px;
-        background-color: rgba(123,123,123,0.3);
-    }
-    #logSign input{
-      width:80%;
-      padding:10px 0px;
-      margin: 10px 0px 0px 0px;
-      text-align:center;
     }
 
     .searchBox{
@@ -102,7 +67,7 @@
 <body onresize="update()">
   <div id="backGroundImage"></div>
 
-  <header> sala_dia_dhaka <button id="logSignBtn" style="float:right;" onclick="showLoginSignup(1)">Login/Signup</button> </header>
+  <header> sala_dia_dhaka <span id="login"></span> </header>
 
   <div class="searchBox">
         <input class="inpText"type="text" maxlength="200" name="searchQuerry" placeholder="Search Location">
@@ -153,6 +118,11 @@
           }
       }
       setImageSize(he);
+  </script>
+  <script src="LoginPopUp/LoginPopUpJS.js"></script>
+  <script>
+    createLoginButton("login");
+    addLoginForm();
   </script>
 </body>
 </html>
