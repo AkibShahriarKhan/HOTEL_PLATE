@@ -16,7 +16,7 @@
       left:0;
       top:0;
       z-index: -1;
-      filter: blur(3px);
+      filter: blur(10px);
     }
 
     header{
@@ -57,11 +57,6 @@
       text-align: center;
       margin:0% 7.5% 0% 0%;
     }
-
-    .slideShowBox{
-      width: 60%;
-      background-color: red;
-    }
   </style>
 </head>
 <body onresize="update()">
@@ -72,28 +67,6 @@
   <div class="searchBox">
         <input class="inpText"type="text" maxlength="200" name="searchQuerry" placeholder="Search Location">
         <input class="inpBtn" type="Submit" value="Search">
-  </div>
-
-  <center>
-    <div id="logSignOverly"></div>
-    <div id="logSign">
-      <form action="index.php" method = "post">
-        <input type = "text" name = "usr" placeholder="User Name" required/><br>
-        <input type="password" name="pass" placeholder="Password" required/><br>
-        <input style="border: 2px solid #ffcc99;" type = "submit" value = "LOGIN"/><br>
-        <a href="#">Forgot Password?</a><br>
-      </form>
-
-      <form action="reg.php">
-        <input style="border: 2px solid #ffcc99;" type = "submit" value = "SIGN UP"/>
-      </form>
-      <button style="margin:10px 0px 0px 0px;" onclick="showLoginSignup(0)">Cancel</button>
-    </div>
-  </center>
-
-  <div class="slideShowBox">
-    <img>
-    <h2></h2>
   </div>
 
   <script>
@@ -119,120 +92,118 @@
       }
       setImageSize(he);
   </script>
+
   <script src="LoginPopUp/LoginPopUpJS.js"></script>
   <script>
     createLoginButton("login");
     addLoginForm();
   </script>
+
 </body>
 </html>
 
 
 <?php
+/*
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "wtproject";
+
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
 
 
 
-
-
-$servername = "localhost";
-			$username = "root";
-			$password = "";
-			$dbname = "wtproject";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
-
-    if($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-      function purify($data)
+      if($_SERVER['REQUEST_METHOD'] == 'POST')
       {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
+        function purify($data)
+        {
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
 
-        return $data;
+          return $data;
+        }
+
+        $usrName = purify($_POST['usr']);
+        $pas = purify($_POST['pass']);
+
+
+    $sql = "SELECT c_email, c_pass FROM client";
+    $result = $conn->query($sql);
+
+    $_sql = "SELECT a_email, a_pass FROM agent";
+    $_result = $conn->query($_sql);
+
+    if ($result->num_rows > 0) {
+      //output data of each row
+      while($row = $result->fetch_assoc()) {
+        //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+        if(!empty($row["c_email"]))
+          {
+            if(trim($row["c_email"]) == $usrName)
+            {
+              $flag = true;
+              if(trim($row["c_pass"]) == $pas)
+              {
+                $_SESSION['usr'] = $usrName;
+                echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
+                header("location:home.php");
+                break;
+
+              }
+              else
+              {
+                echo "<center>Password doesn't match!<br><center>";
+                break;
+              }
+            }
+          }
+
       }
-
-      $usrName = purify($_POST['usr']);
-      $pas = purify($_POST['pass']);
-
-
-	$sql = "SELECT c_email, c_pass FROM client";
-	$result = $conn->query($sql);
-
-	$_sql = "SELECT a_email, a_pass FROM agent";
-	$_result = $conn->query($_sql);
-
-	if ($result->num_rows > 0) {
-		//output data of each row
-		while($row = $result->fetch_assoc()) {
-			//echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-			if(!empty($row["c_email"]))
-    		{
-    			if(trim($row["c_email"]) == $usrName)
-    			{
-    				$flag = true;
-    				if(trim($row["c_pass"]) == $pas)
-    				{
-              $_SESSION['usr'] = $usrName;
-    					echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
-              header("location:home.php");
-    					break;
-
-    				}
-    				else
-    				{
-    					echo "<center>Password doesn't match!<br><center>";
-    					break;
-    				}
-    			}
-    		}
-
-		}
-	}
-	else {
-		echo "0 results";
-	}
-
-			if ($_result->num_rows > 0) {
-		// output data of each row
-		while($_row = $_result->fetch_assoc()) {
-			//echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-			if(!empty($_row["a_email"]))
-    		{
-    			if(trim($_row["a_email"]) == $usrName)
-    			{
-    				$flag = true;
-    				if(trim($_row["a_pass"]) == $pas)
-    				{
-						//echo "Done";
-              $_SESSION['usr'] = $usrName;
-    					echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
-              header("location:agent_home.php");
-    					break;
-
-    				}
-    				else
-    				{
-    					echo "<center>Password doesn't match!<br><center>";
-    					break;
-    				}
-    			}
-    		}
-
-		}
-	}
-
-
-	else {
-		echo "0 results";
-	}
-
     }
- ?>
+    else {
+      echo "0 results";
+    }
+
+        if ($_result->num_rows > 0) {
+      // output data of each row
+      while($_row = $_result->fetch_assoc()) {
+        //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+        if(!empty($_row["a_email"]))
+          {
+            if(trim($_row["a_email"]) == $usrName)
+            {
+              $flag = true;
+              if(trim($_row["a_pass"]) == $pas)
+              {
+              //echo "Done";
+                $_SESSION['usr'] = $usrName;
+                echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
+                header("location:agent_home.php");
+                break;
+
+              }
+              else
+              {
+                echo "<center>Password doesn't match!<br><center>";
+                break;
+              }
+            }
+          }
+
+      }
+    }
+
+
+    else {
+      echo "0 results";
+    }
+
+      }*/
+?>
