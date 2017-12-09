@@ -5,7 +5,16 @@ jjgres
 
 #vscode internal file
 *.code-workspace
-.vscode
+
+# Created by https://www.gitignore.io/api/visualstudiocode
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
 
 # Windows image file caches
 Thumbs.db
