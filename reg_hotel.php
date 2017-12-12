@@ -194,9 +194,14 @@
       <label>City:</label>
       <select name = "city">
         <option value=" "> - </option>
-        <option value="dhaka">Dhaka</option>
-        <option value="rajshahi">chittagong</option>
-        <option value="sylhet">sylhet</option>
+        <option value="DHAKA">DHAKA</option>
+        <option value="CHITTAGONG">CHITTAGONG</option>
+        <option value="KHULNA">KHULNA</option>
+        <option value="MYMENSINGH">MYMENSINGH</option>
+        <option value="RAJSHAHI">RAJSHAHI</option>
+        <option value="RANGPUR">RANGPUR</option>
+        <option value="SYLHET">SYLHET</option>
+
       </select>
 
       <label>Hotel Name </label>

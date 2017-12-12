@@ -219,7 +219,7 @@
 
 
 
-    $sql = "SELECT h_name,h_address, h_phone, h_TIN, a_id, h_photo1 FROM hotel_info /* WHERE d_name='$loc'*/";
+    $sql = "SELECT h_name,h_address, h_phone, h_TIN, a_id, h_photo1 FROM hotel_info";
     $result = $conn->query($sql);
 
 
@@ -233,7 +233,7 @@
         $encoded_image = base64_encode($image_data);
         //You dont need to decode it again.
 
-        $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\">";
+        $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\" width='300' height='200'>";
 
   		echo "<tr><td>"."NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."ADDRESS:"."</td><td>".$row["h_address"]."</td><tr><td> "."PHONE"."</td><td>".$row["h_phone"]."</td><tr><td>"."TIN Number:"."</td><td>".$row["h_TIN"]."</td><tr><td>"."AGENT:"."</td><td>".$row["a_id"]."</td><tr><td>"."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
 
