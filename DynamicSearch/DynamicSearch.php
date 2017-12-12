@@ -3,10 +3,7 @@
     if ($con->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    
-    $searchQuery = $_GET['query'];
-    $sql_1 = "SELECT * FROM agent";
-    $sql = "SELECT d_name FROM district WHERE d_name LIKE '%{$searchQuery}%'";
+    $sql = "SELECT d_name FROM district";
     $result = $con->query($sql);
     $resultArray = array();
     

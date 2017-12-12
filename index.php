@@ -71,20 +71,14 @@
   <header> sala_dia_dhaka <span id="login"></span> </header>
   
 
-
-
   <div class="searchBox">
-        <input id="inpText" type="text" maxlength="200" name="searchQuerry" placeholder="Search Location" onkeyup = "dSearch()">
-        <input class="inpBtn" type="Submit" value="Search"><br>
-        <div id="searchSugg">
-          <table>
-            <tbody>
-              <tr><td></td></tr>
-            </tbody>
-          </table>
-        </div>
+        <form method = "GET" action = "home.php">
+        <input id="inpText" type="text" list="locationList" maxlength="200" name="searchQuerry" placeholder="Search Location">
+        <input class="inpBtn" type="Submit" value="Search" onclick="LaodHotel()"><br>
+        </form>
   </div>
-
+    <datalist id="locationList">
+    </datalist>
   <script>
       var divblock = document.getElementById('backGroundImage');
       var he = window.innerHeight;
@@ -107,14 +101,18 @@
           }
       }
       setImageSize(he);
+      function LaodHotel(){
+
+      }
   </script>
 
   <script src="LoginPopUp/LoginPopUpJS.js"></script>
+  <script src="dynamicSearch/dynamicSearch.js"></script>
   <script>
     createLoginButton("login");
     addLoginForm();
+    DSeacrhAjaxCall();
   </script>
-  <script src="dynamicSearch/dynamicSearch.js"></script>
 
 </body>
 </html>

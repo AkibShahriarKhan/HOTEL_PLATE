@@ -49,6 +49,10 @@ function LoginAjaxCall() {
       if(response == 1){
         window.location.href = "home.php";//relative path with respect to the hosting html page
       }
+      else if(response == 5)
+      {
+        window.location.href = "agent_home.php";
+      }
       else if(response == 2){
         document.getElementById('nameErr').innerHTML = "Name Does Not Exist";
       }
