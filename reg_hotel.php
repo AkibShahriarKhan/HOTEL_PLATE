@@ -1,3 +1,8 @@
+<?php
+    session_start();
+?>
+
+
 <!DOCTYPE html>
 
 <html>
@@ -36,7 +41,7 @@
           border-radius: 4px;
           background-color: #F5B7B1;
           margin-top: 4%;
-          margin-left: 52.5%;
+          margin-left: 27%;
           margin-right: -30%;
           padding: 20px;
           width: 600px;
@@ -44,7 +49,8 @@
         }
 
         body{
-          background-image: url("img/30.jpg");
+          background-image: url(".jpg");
+          background-color: white;
           background-size: cover;
           background-repeat: no-repeat;
           background-attachment: fixed;
@@ -79,7 +85,7 @@
           font-weight: 500;
           text-align: center;
           margin-left: 25%;
-          margin-top: 50px;
+          margin-top: 30px;
         }
 
         .btn:hover{
@@ -130,7 +136,7 @@
             }
 
       li {
-          float: left;
+          float: right;
           }
 
       li a {
@@ -163,12 +169,28 @@
 
   <header> sala_dia_dhaka </header>
   <ul>
+
+
+
+
+    <li><a style="float: right; margin: 0;" href="lout.php">LOGOUT</a></li>
+    <li><a href="abt.php">About us</a></li>
+    <li><a href="con.php">Contact</a></li>
+    <li><a href="reg.php">Registration</a></li>
+    <li><a href="agent.php"><?php echo $_SESSION['usr']; ?></a></li>
+    <li style="margin-top:00px;"><a class = "active" href="agent_home.php">Home</a></li>
+  </ul>
+  <ul>
     <li style="margin-top:00px;"><a class = "active" href="index.php">LOG IN</a></li>
 
 
   </ul>
 
     <form class="container" action = "<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method = "post">
+
+
+
+
       <label>City:</label>
       <select name = "city">
         <option value=" "> - </option>
@@ -179,7 +201,7 @@
 
       <label>Hotel Name </label>
       <input type="text" name = "name" placeholder="Hotel Name" required/>
-      <label>Address </label>
+      <label>Address: </label>
       <input type="text" name = "address" placeholder="Address" required/>
 	     <label>Phone No.</label>
       <input type="text" name = "phone" placeholder="ex: 01710XXXXXX" required/>
@@ -188,10 +210,23 @@
       <label>TIN No.</label>
       <input type="text" name = "TIN" placeholder="TIN Number" required/>
 
-	  <label>Photo</label>
-	  <input type="file" name="fileToUpload" id="fileToUpload">
+	  <label>Sliding Photos:</label>
+    <br>
 
-      <input class = "btn" style = "width: 165px; margin-left: 215px" type = "submit" value = "Register">
+
+    <table  style="width:80%">
+      <tr>
+    <td><input type="file" name="fileToUpload1" id="fileToUploa1"></td>
+    <td><input type="file" name="fileToUpload2" id="fileToUpload2"></td>
+      </tr>
+    <tr>
+    <td><input type="file" name="fileToUpload3" id="fileToUpload3"></td>
+    <td><input type="file" name="fileToUpload4" id="fileToUpload4"></td>
+    </tr>
+  </table>
+
+
+      <input class = "btn"  style = "width: 165px; margin-left: 215px" type = "submit" onclick="<?php header("location:home.php");?>" value = "Register">
 
 
     </form>
@@ -235,19 +270,24 @@
       $address = purify($_POST['address']);
       $phone = purify($_POST['phone']);
       $TIN = purify($_POST['TIN']);
-      $photo = purify($_POST['fileToUpload']);
+      $photo1 = purify($_POST['fileToUpload1']);
+      $photo2 = purify($_POST['fileToUpload2']);
+      $photo3 = purify($_POST['fileToUpload3']);
+      $photo4 = purify($_POST['fileToUpload4']);
 
      }
 
 
 
- $sql = "INSERT INTO hotel_info (d_name,h_name,h_address, h_phone, h_TIN, h_photo)
- VALUES ('$city','$name', '$address', '$phone', '$TIN', '$photo')";
+ $sql = "INSERT INTO hotel_info (d_name,h_name,h_address, h_phone, h_TIN, h_photo1, h_photo2, h_photo3, h_photo4)
+ VALUES ('$city','$name', '$address', '$phone', '$TIN', '$photo1', '$photo2', '$photo3', '$photo4')";
 
 
  if ($conn->query($sql) === TRUE) {
 
    echo "<script type='text/javascript'>alert('Successfully Register!')</script>";
+
+
  } else {
    echo "Error: " . $sql . "<br>" . $conn->error;
  }
@@ -255,5 +295,5 @@
  $conn->close();
 
 }
-
+//header("location:reg_room.php");
    ?>

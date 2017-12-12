@@ -1,38 +1,38 @@
 #logSignBtn{
-    width: 10%;
-    background-color: green;
-    padding: 12px 0px;
-    color: white;
-    border: none;
-    text-align: center;
-  }
-  #logSignOverly{
-    display:none;
-    position:fixed;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    background-color: black;
-    opacity:0.7;
-    z-index:2;
-  }
-  #logSign{
-    position: absolute;
-    top:35%;
-    left:40%;
-    display: none;
-    z-index:3;
-    width: 20%;
-    padding:10px 0px;
-    background-color: rgba(123,123,123,0.3);
-  }
-  #logSign input{
-    width:80%;
-    padding:10px 0px;
-    margin: 10px 0px 0px 0px;
-    text-align:center;
-  }
-  button{
-    width:80%;
-  }
+  width: 10%;
+  background-color: green;
+  padding: 12px 0px;
+  color: white;
+  border: none;
+  text-align: center;
+}
+#logSignOverly{
+  display:none;
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background-color: black;
+  opacity:0.7;
+  z-index:2;
+}
+#logSign{
+  position: absolute;
+  top:35%;
+  left:40%;
+  display: none;
+  z-index:3;
+  width: 20%;
+  padding:10px 0px;
+  background-color: rgba(123,123,123,0.3);
+}
+#logSign input{
+  width:80%;
+  padding:10px 0px;
+  margin: 10px 0px 0px 0px;
+  text-align:center;
+}
+button{
+  width:80%;
+}

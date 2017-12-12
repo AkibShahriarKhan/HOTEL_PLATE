@@ -68,7 +68,7 @@
         padding: 20px;
         width: 600px;
 
-        font-size: 35px;
+        font-size: 20px;
         float: left;
       }
 
@@ -249,11 +249,11 @@
       $encoded_image = base64_encode($image_data);
       //You dont need to decode it again.
 
-      $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\">";
+      $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\" width='150' height='150'>";
 
 
 
-		echo "<tr><td>"."NAME:"."</td><td>".$row["a_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["a_email"]."</td><tr><td> "."Password"."</td><td>".$row["a_pass"]." <a class = 'aCust' style = 'font-size:8' href='agent.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["a_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["a_position"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["a_phone"]."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
+		echo "<tr><td>"."$Hinh</img>"."</td><tr><td>"."NAME:"."</td><td>".$row["a_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["a_email"]."</td><tr><td> "."Password"."</td><td>".$row["a_pass"]." <a class = 'aCust' style = 'font-size:8' href='agent.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["a_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["a_position"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["a_phone"]."</td></tr>";
 
   }
   echo "</table>";

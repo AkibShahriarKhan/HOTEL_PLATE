@@ -19,6 +19,9 @@
       filter: blur(10px);
     }
 
+
+
+
     header{
       padding: 20px;
       text-align: center;
@@ -32,6 +35,9 @@
       background-color:#2ECC71;
     }
 
+
+
+
     .searchBox{
       width:60%;
       margin:2% 20% 0% 20%;
@@ -41,7 +47,7 @@
       padding:10px;
       box-shadow: 0px 8px 8px -4px rgba(0, 0, 0, 0.2), 0px -8px 8px -4px rgba(0, 0, 0, 0.2);
     }
-    .inpText{
+    #inpText{
       width: 50%;
       margin: 0% 0% 0% 7.5%;
       text-align: center;
@@ -63,10 +69,20 @@
   <div id="backGroundImage"></div>
 
   <header> sala_dia_dhaka <span id="login"></span> </header>
+  
+
+
 
   <div class="searchBox">
-        <input class="inpText"type="text" maxlength="200" name="searchQuerry" placeholder="Search Location">
-        <input class="inpBtn" type="Submit" value="Search">
+        <input id="inpText" type="text" maxlength="200" name="searchQuerry" placeholder="Search Location" onkeyup = "dSearch()">
+        <input class="inpBtn" type="Submit" value="Search"><br>
+        <div id="searchSugg">
+          <table>
+            <tbody>
+              <tr><td></td></tr>
+            </tbody>
+          </table>
+        </div>
   </div>
 
   <script>
@@ -98,112 +114,7 @@
     createLoginButton("login");
     addLoginForm();
   </script>
+  <script src="dynamicSearch/dynamicSearch.js"></script>
 
 </body>
 </html>
-
-
-<?php
-/*
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "wtproject";
-
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-  if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-  }
-
-
-
-      if($_SERVER['REQUEST_METHOD'] == 'POST')
-      {
-        function purify($data)
-        {
-          $data = trim($data);
-          $data = stripslashes($data);
-          $data = htmlspecialchars($data);
-
-          return $data;
-        }
-
-        $usrName = purify($_POST['usr']);
-        $pas = purify($_POST['pass']);
-
-
-    $sql = "SELECT c_email, c_pass FROM client";
-    $result = $conn->query($sql);
-
-    $_sql = "SELECT a_email, a_pass FROM agent";
-    $_result = $conn->query($_sql);
-
-    if ($result->num_rows > 0) {
-      //output data of each row
-      while($row = $result->fetch_assoc()) {
-        //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-        if(!empty($row["c_email"]))
-          {
-            if(trim($row["c_email"]) == $usrName)
-            {
-              $flag = true;
-              if(trim($row["c_pass"]) == $pas)
-              {
-                $_SESSION['usr'] = $usrName;
-                echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
-                header("location:home.php");
-                break;
-
-              }
-              else
-              {
-                echo "<center>Password doesn't match!<br><center>";
-                break;
-              }
-            }
-          }
-
-      }
-    }
-    else {
-      echo "0 results";
-    }
-
-        if ($_result->num_rows > 0) {
-      // output data of each row
-      while($_row = $_result->fetch_assoc()) {
-        //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-        if(!empty($_row["a_email"]))
-          {
-            if(trim($_row["a_email"]) == $usrName)
-            {
-              $flag = true;
-              if(trim($_row["a_pass"]) == $pas)
-              {
-              //echo "Done";
-                $_SESSION['usr'] = $usrName;
-                echo "<center>Welcome <b>$usrName</b>!<br> Logged in!</center>";
-                header("location:agent_home.php");
-                break;
-
-              }
-              else
-              {
-                echo "<center>Password doesn't match!<br><center>";
-                break;
-              }
-            }
-          }
-
-      }
-    }
-
-
-    else {
-      echo "0 results";
-    }
-
-      }*/
-?>

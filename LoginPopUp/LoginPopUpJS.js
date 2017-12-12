@@ -60,7 +60,7 @@ function LoginAjaxCall() {
       }
     }
   };
-  xhttp.open("POST", "Project/login.php", true);
+  xhttp.open("POST", "LoginPopUp/login.php", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("uname="+username+"&pass="+password);
   

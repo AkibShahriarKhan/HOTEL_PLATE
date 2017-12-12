@@ -178,19 +178,6 @@ ALTER TABLE `hotel_room`
 ALTER TABLE `order_list`
   ADD PRIMARY KEY (`c_email`);
 
-ALTER TABLE hotel_room
-ADD FOREIGN KEY (h_name) REFERENCES hotel_info(h_name);
-ALTER TABLE hotel_info
-ADD FOREIGN KEY (a_id) REFERENCES agent(a_id);
-ALTER TABLE order_list
-ADD FOREIGN KEY (c_email) REFERENCES client(c_email);
-ALTER TABLE hotel_info
-ADD FOREIGN KEY (h_name) REFERENCES district(d_name);
-ALTER TABLE order_list
-ADD FOREIGN KEY (h_name) REFERENCES hotel_room(h_name);
-ALTER TABLE order_list
-ADD FOREIGN KEY (r_no) REFERENCES hotel_room(r_no);
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

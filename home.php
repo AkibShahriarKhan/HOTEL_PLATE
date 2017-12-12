@@ -1,5 +1,6 @@
 <?php
     session_start();
+    //$location=$_SESSION['loc'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -182,7 +183,9 @@
     <input type="hidden" name = "chk" value = "1">
     <input class = "btn" type = "submit" name = "ch" value = "Checkout">
   </form>
+<container>
 
+</container>
 
   <?php
     $servername = "localhost";
@@ -197,16 +200,35 @@
     die("Connection failed: " . $conn->connect_error);
     }
 
+    /*if($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+      function purify($data)
+      {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
 
-    $sql = "SELECT h_name,h_address, h_phone, h_TIN, a_id, h_photo FROM hotel_info";
+        return $data;
+      }
+
+
+      $loc = purify($_POST['searchloc']);
+      $_SESSION['loc'] = $loc;
+*/
+
+
+
+
+    $sql = "SELECT h_name,h_address, h_phone, h_TIN, a_id, h_photo1 FROM hotel_info /* WHERE d_name='$loc'*/";
     $result = $conn->query($sql);
+
 
     if ($result->num_rows > 0) {
     echo "<table class='container' width:10%>";
     if(!isset($_GET['edit']) || $_GET['edit'] == 'false')
     {
   	  while($row = $result->fetch_assoc()) {
-        $image_data = $row["h_photo"];
+        $image_data = $row["h_photo1"];
         $image_name = $row["h_name"];
         $encoded_image = base64_encode($image_data);
         //You dont need to decode it again.
@@ -216,8 +238,10 @@
   		echo "<tr><td>"."NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."ADDRESS:"."</td><td>".$row["h_address"]."</td><tr><td> "."PHONE"."</td><td>".$row["h_phone"]."</td><tr><td>"."TIN Number:"."</td><td>".$row["h_TIN"]."</td><tr><td>"."AGENT:"."</td><td>".$row["a_id"]."</td><tr><td>"."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
 
     }
-    echo "</table>";
+    echo " <tr><td><a href='room_view.php'>Room View</a></td></tr></table></table>";
     }
+
+
     else if($_GET['edit'] == 'true')
     {
   	while($row = $result->fetch_assoc()) {
@@ -236,6 +260,7 @@
     else {
     echo "0 results";
     }
+  //}
   ?>
 
 
