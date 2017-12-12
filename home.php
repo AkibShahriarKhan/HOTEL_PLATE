@@ -1,6 +1,7 @@
 <?php
     session_start();
     //$location=$_SESSION['loc'];
+    echo $_GET['searchQuerry'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -174,7 +175,7 @@
     <li><a href="abt.php">About us</a></li>
     <li><a href="con.php">Contact</a></li>
     <li><a href="reg.php">Registration</a></li>
-    <li><a href="client.php"><?php echo $_SESSION['usr']; ?></a></li>
+    <li><a href="client.php"><?php if(isset($_SESSION['usr'])){echo $_SESSION['usr']; } ?></a></li>
     <li style="margin-top:00px;"><a class = "active" href="home.php">Home</a></li>
   </ul>
   <?php //echo "<wl>Welcome, ".$_SESSION['usr']."</wl>"; ?>
@@ -200,65 +201,54 @@
     die("Connection failed: " . $conn->connect_error);
     }
 
-    /*if($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-      function purify($data)
-      {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-
-        return $data;
-      }
-
-
-      $loc = purify($_POST['searchloc']);
-      $_SESSION['loc'] = $loc;
-*/
 
 
 
 
-    $sql = "SELECT h_name,h_address, h_phone, h_TIN, a_id, h_photo1 FROM hotel_info";
-    $result = $conn->query($sql);
 
+    //$sql = `SELECT h_name, h_address, h_phone, h_TIN, a_email, h_photo1 FROM hotel_info where d_name = '`+$_GET['searchQuerry']+`'"`;
+    //$result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT h_name, h_address, h_phone, h_TIN, a_email, h_photo1 FROM hotel_info where d_name = ?");
+    
+    $stmt->bind_param("s", $_GET['searchQuerry']);
+
+    //Executing Query
+    $stmt->execute();
+    //Loading Results
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-    echo "<table class='container' width:10%>";
-    if(!isset($_GET['edit']) || $_GET['edit'] == 'false')
-    {
+      echo "<table class='container' width:10%>";
+      if(!isset($_GET['edit']) || $_GET['edit'] == 'false'){
+  	    while($row = $result->fetch_assoc()) {
+          $image_data = $row["h_photo1"];
+          $image_name = $row["h_name"];
+          $encoded_image = base64_encode($image_data);
+          //You dont need to decode it again.
+
+          $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\" width='300' height='200'>";
+
+  		    echo "<tr><td>"."NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."ADDRESS:"."</td><td>".$row["h_address"]."</td><tr><td> "."PHONE"."</td><td>".$row["h_phone"]."</td><tr><td>"."TIN Number:"."</td><td>".$row["h_TIN"]."</td><tr><td>"."AGENT:"."</td><td>".$row["a_email"]."</td><tr><td>"."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
+
+        }
+      echo " <tr><td><a href='room_view.php'>Room View</a></td></tr></table></table>";
+    }
+
+
+    else if($_GET['edit'] == 'true'){
   	  while($row = $result->fetch_assoc()) {
-        $image_data = $row["h_photo1"];
-        $image_name = $row["h_name"];
-        $encoded_image = base64_encode($image_data);
-        //You dont need to decode it again.
+        echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]." <a class = 'aCust' style = 'font-size:8' href='client.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["c_name"]."</td></tr>";
+      }
+      echo "</table>";
 
-        $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\" width='300' height='200'>";
-
-  		echo "<tr><td>"."NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."ADDRESS:"."</td><td>".$row["h_address"]."</td><tr><td> "."PHONE"."</td><td>".$row["h_phone"]."</td><tr><td>"."TIN Number:"."</td><td>".$row["h_TIN"]."</td><tr><td>"."AGENT:"."</td><td>".$row["a_id"]."</td><tr><td>"."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
-
-    }
-    echo " <tr><td><a href='room_view.php'>Room View</a></td></tr></table></table>";
-    }
-
-
-    else if($_GET['edit'] == 'true')
-    {
-  	while($row = $result->fetch_assoc()) {
-
-  		echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]." <a class = 'aCust' style = 'font-size:8' href='client.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>".$row["c_name"]."</td></tr>";
-
-    }
-    echo "</table>";
-
-  	$_GET['edit'] == 'false';
+  	  $_GET['edit'] == 'false';
     }
 
 
     }
 
     else {
-    echo "0 results";
+      echo "0 results";
     }
   //}
   ?>

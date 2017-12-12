@@ -72,10 +72,10 @@
   
 
   <div class="searchBox">
-        <form method = "GET" action = "home.php">
-        <input id="inpText" type="text" list="locationList" maxlength="200" name="searchQuerry" placeholder="Search Location">
-        <input class="inpBtn" type="Submit" value="Search" onclick="LaodHotel()"><br>
-        </form>
+    <form method = "GET" action = "home.php">
+      <input id="inpText" type="text" list="locationList" maxlength="200" name="searchQuerry" placeholder="Search Location">
+      <input class="inpBtn" type="Submit" value="Search"><br>
+    </form>
   </div>
     <datalist id="locationList">
     </datalist>
