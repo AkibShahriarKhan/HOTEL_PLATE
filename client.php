@@ -255,7 +255,7 @@
 
       $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\">";
 
-		echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]." <a class = 'aCust' style = 'font-size:8' href='client.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
+		echo "<tr><td>"."NAME:"."</td><td>".$row["c_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["c_email"]."</td><tr><td> "."Password"."</td><td>".$row["c_pass"]." <a class = 'aCust' style = 'font-size:8' href='client_update.php'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["c_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["c_occupation"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["c_phone"]."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
 
   }
   echo "</table>";

@@ -234,7 +234,6 @@
   die("Connection failed: " . $conn->connect_error);
   }
 
-
   $sql = "SELECT a_name,a_email, a_pass, a_gender, a_phone, a_age, a_position, a_photo FROM agent WHERE a_email='$bal'";
   $result = $conn->query($sql);
 
@@ -253,7 +252,7 @@
 
 
 
-		echo "<tr><td>"."$Hinh</img>"."</td><tr><td>"."NAME:"."</td><td>".$row["a_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["a_email"]."</td><tr><td> "."Password"."</td><td>".$row["a_pass"]." <a class = 'aCust' style = 'font-size:8' href='agent.php?edit=true'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["a_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["a_position"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["a_phone"]."</td></tr>";
+		echo "<tr><td>"."$Hinh</img>"."</td><tr><td>"."NAME:"."</td><td>".$row["a_name"]."</td><tr><td>"."EMAIL:"."</td><td>".$row["a_email"]."</td><tr><td> "."Password"."</td><td>".$row["a_pass"]." <a class = 'aCust' style = 'font-size:8' href='agent_reg_update.php'>Update</a></td><tr><td>"."GENDER:"."</td><td>".$row["a_gender"]."</td><tr><td>"."OCCUPATION:"."</td><td>".$row["a_position"]."</td><tr><td>"."PHONE NO."."</td><td>".$row["a_phone"]."</td></tr>";
 
   }
   echo "</table>";
