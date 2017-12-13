@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ob_start();
 ?>
 
 
@@ -8,6 +9,12 @@
 <html>
 <head>
   <title> Agent Hotel Registration </title>
+
+  <title>Add or Remove Hotel</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
 
   <style>
         header
@@ -39,14 +46,26 @@
         .container{
           opacity: 0.8;
           border-radius: 4px;
-          background-color: #F5B7B1;
-          margin-top: 4%;
-          margin-left: 27%;
-          margin-right: -30%;
+          background-color: #ff1a1a;
+          margin-top: 2%;
+          margin-left: 2%;
+
           padding: 20px;
           width: 600px;
           text-align: center;
         }
+
+        .container2{
+ 						  opacity: 0.8;
+ 						  border-radius: 4px;
+ 						  background-color: #F5B7B5;
+ 						  margin-top: 4%;
+ 						  margin-left: 17%;
+ 						  margin-right: -30%;
+ 						  padding: 20px;
+ 						  width: 1000px;
+ 						  text-align: center;
+ 					}
 
         body{
           background-image: url(".jpg");
@@ -73,6 +92,7 @@
           font-family: calibri;
           font-weight: lighter;
           text-transform: uppercase;
+
         }
 
         .btn{
@@ -132,7 +152,7 @@
         padding: 0;
         overflow: hidden;
         background-color: #333;
-        float: right;
+        float: left;
             }
 
       li {
@@ -143,7 +163,7 @@
           display: block;
           color: white;
           text-align: center;
-          padding: 14px 16px;
+          padding: 14px 61px;
           text-decoration: none;
             }
 
@@ -177,10 +197,8 @@
     <li><a href="abt.php">About us</a></li>
     <li><a href="con.php">Contact</a></li>
     <li><a href="reg.php">Registration</a></li>
-    <li><a href="agent.php"><?php echo $_SESSION['usr']; ?></a></li>
+    <li><a href="agent.php"><?php if(isset($_SESSION['usr'])){echo $_SESSION['usr']; } ?></a></li>
     <li style="margin-top:00px;"><a class = "active" href="agent_home.php">Home</a></li>
-  </ul>
-  <ul>
     <li style="margin-top:00px;"><a class = "active" href="index.php">LOG IN</a></li>
 
 
@@ -231,10 +249,23 @@
   </table>
 
 
-      <input class = "btn"  style = "width: 165px; margin-left: 215px" type = "submit" onclick="<?php header("location:home.php");?>" value = "Register">
+      <input class = "btn"  style = "width: 165px; margin-left: 215px" type = "submit" value = "Register">
 
 
     </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <footer style = "font-family:calibri; letter-spacing:2px; background: orange; text-transform: uppercase;"> Copyright &copy 2018 </footer>
 </body>
@@ -290,6 +321,8 @@
 
  if ($conn->query($sql) === TRUE) {
 
+   $_SESSION['hotel'] = $name;
+   header("location:reg_room.php");
    echo "<script type='text/javascript'>alert('Successfully Register!')</script>";
 
 

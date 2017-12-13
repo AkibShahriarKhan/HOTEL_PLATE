@@ -176,8 +176,7 @@
       <input type="text" name = "age" placeholder="Your Age" required/>
 	  <label>Position</label>
       <input type="text" name = "position" placeholder="Your Position In Hotel" required/>
-	  <label>Agent ID</label>
-	  <input type="text" name = "agent_id" placeholder="Your Agent ID" required/>
+	  
 	  <label>Photo</label>
 	  <input type="file" name="fileToUpload" id="fileToUpload">
 
@@ -213,13 +212,13 @@
           $pass = purify($_POST['pass']);
           $age = purify($_POST['age']);
           $position = purify($_POST['position']);
-		      $agent_id = purify($_POST['agent_id']);
+
 		      $photo = purify($_POST['fileToUpload']);
 
 
 
-		  $sql = "INSERT INTO agent (a_name, a_email, a_pass, a_phone, a_age, a_position, a_photo, a_id)
-			VALUES ('$name', '$email', '$pass', '$phone', '$age', '$position', '$photo', '$agent_id')";
+		  $sql = "INSERT INTO agent (a_name, a_email, a_pass, a_phone, a_age, a_position, a_photo)
+			VALUES ('$name', '$email', '$pass', '$phone', '$age', '$position', '$photo')";
 
 
 		  if ($conn->query($sql) === TRUE) {
