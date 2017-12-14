@@ -57,7 +57,7 @@
       float: right;    }
 
     body{
-      background-image: url("img/2.jpg");
+      background-image: url(".jpg");
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;   }
@@ -200,16 +200,7 @@
     if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
     }
-
-
-
-
-
-
-    //$sql = `SELECT h_name, h_address, h_phone, h_TIN, a_email, h_photo1 FROM hotel_info where d_name = '`+$_GET['searchQuerry']+`'"`;
-    //$result = $conn->query($sql);
     $stmt = $conn->prepare("SELECT h_name, h_address, h_phone, h_TIN, a_email, h_photo1 FROM hotel_info where d_name = ?");
-    
     $stmt->bind_param("s", $_GET['searchQuerry']);
 
     //Executing Query
@@ -218,7 +209,6 @@
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-      echo "<table class='container' width:10%>";
       if(!isset($_GET['edit']) || $_GET['edit'] == 'false'){
   	    while($row = $result->fetch_assoc()) {
           $image_data = $row["h_photo1"];
@@ -227,11 +217,11 @@
           //You dont need to decode it again.
 
           $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\" width='300' height='200'>";
-
+          echo "<table class='container' width:10%>";
   		    echo "<tr><td>"."NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."ADDRESS:"."</td><td>".$row["h_address"]."</td><tr><td> "."PHONE"."</td><td>".$row["h_phone"]."</td><tr><td>"."TIN Number:"."</td><td>".$row["h_TIN"]."</td><tr><td>"."AGENT:"."</td><td>".$row["a_email"]."</td><tr><td>"."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
-
+          echo " <tr><td><a href='room_view.php?hotelName=".$row['h_name']."'>Room View</a></td></tr></table>";
         }
-      echo " <tr><td><a href='room_view.php'>Room View</a></td></tr></table></table>";
+
     }
 
 

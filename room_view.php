@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $usr=$_SESSION['usr'];
+    //$usr=$_SESSION['usr'];
     ?>
 <!DOCTYPE html>
 <html>
@@ -67,7 +67,7 @@
         padding: 20px;
         width: 600px;
 
-        font-size: 35px;
+        font-size: 20px;
         float: left;
       }
 
@@ -204,16 +204,20 @@
 <body>
 
   <header> sala_dia_dhaka </header>
-  <!--
+
   <ul>
+
+
+
+
     <li><a style="float: right; margin: 0;" href="lout.php">LOGOUT</a></li>
     <li><a href="abt.php">About us</a></li>
     <li><a href="con.php">Contact</a></li>
     <li><a href="reg.php">Registration</a></li>
-    <li><a href="client.php"><?php echo $_SESSION['usr']; ?></a></li>
+    <li><a href="client.php"><?php if(isset($_SESSION['usr'])){echo $_SESSION['usr']; } ?></a></li>
     <li style="margin-top:00px;"><a class = "active" href="home.php">Home</a></li>
   </ul>
--->
+
 <?php
   $servername = "localhost";
   $username = "root";
@@ -228,8 +232,12 @@
   }
 
 
-  $sql = "SELECT h_name,ac, r_type, r_cost, r_pic, r_no, r_avail FROM hotel_room";
-  $result = $conn->query($sql);
+  $stmt = $conn->prepare("SELECT h_name,ac, r_type, r_cost, r_pic, r_no FROM hotel_room WHERE h_name =?");
+  $stmt->bind_param("s", $_GET['hotelName']);
+  //Executing Query
+  $stmt->execute();
+  //Loading Results
+  $result = $stmt->get_result();
 
 
 
@@ -245,7 +253,7 @@
 
 
   if ($result->num_rows > 0) {
-  echo "<table class='container2' width:10%>";
+
   if(!isset($_GET['edit']) || $_GET['edit'] == 'false')
   {
 	  while($row = $result->fetch_assoc()) {
@@ -253,21 +261,22 @@
       $image_name = $row["r_no"];
       $encoded_image = base64_encode($image_data);
       //You dont need to decode it again.
-
-      $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\">";
+      echo "<table class='container2' width:10%>";
+      $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\" width='200' height='150'>";
 
 		echo "<tr><td>"."HOTEL NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."AC:"."</td><td>".$row["ac"]."</td><tr><td>"."ROOM TYPE"."</td><td>".$row["r_type"]."</td><tr><td>"."PRICE:"."</td><td>".$row["r_cost"]."</td><tr><td>"."ROOM NUMBER:"."</td><td>".$row["r_no"]."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
-
+    echo "</table>";
   }
-  echo "</table>";
+
   }
   else if($_GET['edit'] == 'true')
   {
 	while($row = $result->fetch_assoc()) {
 
 		echo "<tr><td>"."HOTEL NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."AC:"."</td><td>".$row["ac"]."</td><tr><td>"."ROOM TYPE"."</td><td>".$row["r_type"]."</td><tr><td>"."PRICE:"."</td><td>".$row["r_cost"]."</td><tr><td>"."ROOM NUMBER:"."</td><td>".$row["r_no"]."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
+    echo "</table>";
   }
-  echo "</table>";
+
 
 	$_GET['edit'] == 'false';
   }

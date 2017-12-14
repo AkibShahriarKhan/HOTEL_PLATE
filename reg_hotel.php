@@ -315,8 +315,8 @@
 
 
 
- $sql = "INSERT INTO hotel_info (d_name,h_name,h_address, h_phone, h_TIN, h_photo1, h_photo2, h_photo3, h_photo4)
- VALUES ('$city','$name', '$address', '$phone', '$TIN', '$photo1', '$photo2', '$photo3', '$photo4')";
+ $sql = "INSERT INTO hotel_info (d_name,h_name,h_address, h_phone, h_TIN, h_photo1)
+ VALUES ('$city','$name', '$address', '$phone', '$TIN', '$photo1')";
 
 
  if ($conn->query($sql) === TRUE) {

@@ -45,8 +45,8 @@ session_start();
       {
            if(trim($_POST["name"][$i] != ''))
            {
-                $sql = "INSERT INTO hotel_room(h_name,r_type,r_no, ac, r_cost, r_pic) VALUES('".mysqli_real_escape_string($connect, $_SESSION['hotel'])."','".mysqli_real_escape_string($connect, $rType)."','".mysqli_real_escape_string($connect, $_POST["name"][$i])."', '".mysqli_real_escape_string($connect, $ac)."', '".mysqli_real_escape_string($connect, $_POST["cost"][$i])."', '".mysqli_real_escape_string($connect, $_POST["fileToUpload"][$i])."')";
-                mysqli_query($connect, $sql);
+             $sql = "INSERT INTO hotel_room(h_name,r_type,r_no, ac, r_cost, r_pic) VALUES('".mysqli_real_escape_string($connect, $_SESSION['hotel'])."','".mysqli_real_escape_string($connect, $rType)."','".mysqli_real_escape_string($connect, $_POST["name"][$i])."', '".mysqli_real_escape_string($connect, $ac)."', '".mysqli_real_escape_string($connect, $_POST["cost"][$i])."', '".mysqli_real_escape_string($connect, $_POST["fileToUpload"][$i])."')";
+              mysqli_query($connect, $sql);
            }
       }
       echo "Data Inserted";
