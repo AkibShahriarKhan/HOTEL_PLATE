@@ -1,6 +1,8 @@
 <?php
     session_start();
     //$usr=$_SESSION['usr'];
+    $isLoggedIn = isset($_SESSION['usr'])?"true":"false";
+	ob_start();
     ?>
 <!DOCTYPE html>
 <html>
@@ -101,7 +103,7 @@
         margin-top: 10px;
         margin-left: -10px;
         margin-bottom: 10px;
-        width: 300px;
+        width: 200px;
         display: inline-block;
         float: left;
       }
@@ -218,11 +220,17 @@
     <li style="margin-top:00px;"><a class = "active" href="home.php">Home</a></li>
   </ul>
 
+  <form style = "position: fixed; margin-left: 70%;" action  = "chk.php" method = "post">
+    <input type="hidden" name = "chk" value = "1">
+    <input class = "btn" type = "submit" name = "ch" value = "Checkout">
+  </form>
+
 <?php
   $servername = "localhost";
   $username = "root";
   $password = "";
   $dbname = "wtproject";
+  $_SESSION['hn'] = $_GET['hotelName'];
 
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);
@@ -264,21 +272,10 @@
       echo "<table class='container2' width:10%>";
       $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\" width='200' height='150'>";
 
-		echo "<tr><td>"."HOTEL NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."AC:"."</td><td>".$row["ac"]."</td><tr><td>"."ROOM TYPE"."</td><td>".$row["r_type"]."</td><tr><td>"."PRICE:"."</td><td>".$row["r_cost"]."</td><tr><td>"."ROOM NUMBER:"."</td><td>".$row["r_no"]."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
-    echo "</table>";
-  }
+      echo "<tr><td>"."HOTEL NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."AC:"."</td><td>".$row["ac"]."</td><tr><td>"."ROOM TYPE"."</td><td>".$row["r_type"]."</td><tr><td>"."PRICE:"."</td><td>".$row["r_cost"]."</td><tr><td>"."ROOM NUMBER:"."</td><td>".$row["r_no"]."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."<br><a style = 'color:blue' href = 'add.php?h_name=".$row["h_name"]."&c_id=".$_SESSION['usr']."&cost=".$row["r_cost"]."'>Add to cart </a></td></tr>";
 
   }
-  else if($_GET['edit'] == 'true')
-  {
-	while($row = $result->fetch_assoc()) {
 
-		echo "<tr><td>"."HOTEL NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."AC:"."</td><td>".$row["ac"]."</td><tr><td>"."ROOM TYPE"."</td><td>".$row["r_type"]."</td><tr><td>"."PRICE:"."</td><td>".$row["r_cost"]."</td><tr><td>"."ROOM NUMBER:"."</td><td>".$row["r_no"]."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
-    echo "</table>";
-  }
-
-
-	$_GET['edit'] == 'false';
   }
 
 
@@ -287,28 +284,30 @@
   else {
   echo "0 results";
   }
+
+  if(isset($_SESSION['arr']) && !empty($_SESSION['arr']))
+  {
+    $temp = 0;
+    $arr1 = $_SESSION['arr'];
+    echo "<table style='background-color:grey;float:right'>";
+    foreach($arr1 as $x => $x_val)
+    {
+      echo "<tr style = 'text-align:center'><td style = 'border: 1px solid grey; width: 100px;'><center>".$x."</center></td>";
+      echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[0]."</td>";
+      echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[1]."<form style = 'display: inline-block; float:right;' action= 'rem.php' method='post'> <input type='hidden' name = 'r' value = '".$x."'> <input style='width: 50px;margin-left:150px; margin-top:0px;' type = 'submit' value = 'remove'></td></tr>";
+      $_SESSION['total'] = $x_val[1];
+    }
+    if(!empty($_SESSION['arr']))
+    {
+      echo "<tr style = 'text-align:center'><td>Total</td> <td> </td> <td>".$_SESSION['total']."</td></tr>";
+    }
+  }
 ?>
 
 
 
     <?php
-      if(isset($_SESSION['arr']) && !empty($_SESSION['arr']))
-      {
-        $temp = 0;
-        $arr1 = $_SESSION['arr'];
-        foreach($arr1 as $x => $x_val)
-        {
-          echo "<tr style = 'text-align:center'><td style = 'border: 1px solid grey; width: 100px;'><center>".$x."</center></td>";
-          echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[0]."</td>";
-          echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[0]*$x_val[1]."<form style = 'display: inline-block; float:right;' action= 'rem.php' method='post'> <input type='hidden' name = 'r' value = '".$x."'> <input style='margin-left:150px; margin-top:-200px;' type = 'submit' value = 'remove'></td></tr>";
-          $temp += $x_val[0]*$x_val[1];
-        }
-        if(!empty($_SESSION['arr']))
-        {
-          echo "<tr style = 'text-align:center'><td>Total</td> <td> </td> <td>".$temp."</td></tr>";
-          $_SESSION['total'] = $temp;
-        }
-      }
+      
     ?>
   </table><br>
 

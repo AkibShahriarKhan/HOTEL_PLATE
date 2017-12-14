@@ -83,16 +83,23 @@ session_start();
             if($passFromFile == $pass)
             {
                 //echo "success";
-                if($_SESSION['tuser'] == 'client')
-				{
-					$_SESSION['usr']=$name;
-					echo "1";
-				}
-				else if($_SESSION['tuser'] == 'agent')
-				{
-					$_SESSION['usr']=$name;
-					echo "5";
-				}
+                if(isset($_SESSION['loginCheck']) && $_SESSION['loginCheck'] == TRUE)
+                {
+                    $_SESSION['usr']=$name;
+                    header("Location: ../room_view.php?hotelName=".$_SESSION['hn']);
+                }
+                else{
+                    if($_SESSION['tuser'] == 'client')
+                    {
+                        $_SESSION['usr']=$name;
+                        echo "1";
+                    }
+                    else if($_SESSION['tuser'] == 'agent')
+                    {
+                        $_SESSION['usr']=$name;
+                        echo "5";
+                    }
+                }
             }
             else{
                 $passErr = "Wrong Password";

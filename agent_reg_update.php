@@ -259,7 +259,7 @@ ob_start();
 
 
 
-		  $sql = "UPDATE agent SET a_name = '$name', a_pass = '$pass', a_phone = '$phone', a_age= '$age', a_position = '$position'";
+		  $sql = "UPDATE agent SET a_name = '$name', a_pass = '$pass', a_phone = '$phone', a_age= '$age', a_position = '$position' where a_email = '".$_SESSION['usr']."'";
 
 
 		  if ($conn->query($sql) === TRUE) {

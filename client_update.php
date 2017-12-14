@@ -232,14 +232,14 @@ $servername = "localhost";
           }
 
           $fname = purify($_POST['fn']);
-          $email = purify($_POST['mail']);
+          //$email = purify($_POST['mail']);
           $mobile = purify($_POST['m']);
-          $usr = purify($_POST['u']);
+          //$usr = purify($_POST['u']);
           $pass = purify($_POST['p']);
 		  $age = purify($_POST['ag']);
 
 
-		  $sql = "UPDATE client SET c_name = '$fname', c_pass = '$pass', c_phone = '$mobile', c_age = '$age'";
+		  $sql = "UPDATE client SET c_name = '$fname', c_pass = '$pass', c_phone = '$mobile', c_age = '$age' where c_email = '".$_SESSION['usr']."'";
 
 
 		  if ($conn->query($sql) === TRUE) {

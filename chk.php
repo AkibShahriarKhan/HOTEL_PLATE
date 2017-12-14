@@ -103,9 +103,38 @@ $usrName = $_SESSION['usr'];
       exit;
     }
 
-
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "wtproject";
+  
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+    }
 
     $ar = $_SESSION['arr'];
+
+    foreach($ar as $x => $x_val)
+    {
+        $sql = "SELECT * from order_list where c_email = '$x_val[0]'";
+        $result = $conn->query($sql);
+        if($result->num_rows > 0)
+        {
+          $row = $result->fetch_assoc();
+          $t = $row['total'];
+          $t += $x_val[1];
+          $sql = "UPDATE order_list SET total = '$t'" . "where c_email = '".$x_val[0]."'";
+          $conn->query($sql);
+        }
+        else
+        {
+          $sql = "INSERT into order_list (h_name,c_email,total) VALUES('$x','$x_val[0]','$x_val[1]')";
+          $conn->query($sql);
+        }
+    }
 
     //echo "<center><p>Room Booked. Total Bill: ".$_SESSION['total']."</p><br></center>";
 
@@ -122,27 +151,27 @@ $usrName = $_SESSION['usr'];
 
 
 
-
+    /*
     $d=date("Y-m-d h:i:sa");
 
     foreach($ar as $x=> $x_val)
     {
 
-      $sql = "INSERT INTO order_list (user, product, quantity, cost, time)
+      $sql = "INSERT INTO order_list (c_email, product, quantity, cost, time)
       VALUES ('$usrName', '$x', '$x_val[0]', '$x_val[1]', '$d'  )";
 
-    }
+    }*/
 
     $ar = null;
 
     $_SESSION['arr'] = $ar;
 
-
+    /*
     if ($conn->query($sql) === TRUE) {
       echo "New record created successfully";
     } else {
       echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+    }*/
 
     $conn->close();
 

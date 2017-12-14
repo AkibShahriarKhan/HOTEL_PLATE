@@ -1,12 +1,15 @@
 <?php
-  session_start();
+  session_start(); 
+  $isLoggedIn = isset($_SESSION['usr'])?"true":"false";
  ?>
 <!DOCTYPE html>
 <html>
 <head>
   <title> Welcome! </title>
   <link rel="stylesheet" href="LoginPopUp/LoginPopUpCSS.css">
-
+  <script src="LoginPopUp/LoginPopUpJS.js"></script>
+  <script src="dynamicSearch/dynamicSearch.js"></script>
+  
   <style>
     #backGroundImage{
       background-image: url('jjgres/photo_1.jpg');
@@ -18,9 +21,6 @@
       z-index: -1;
       filter: blur(10px);
     }
-
-
-
 
     header{
       padding: 20px;
@@ -34,9 +34,6 @@
       font-size: 32px;
       background-color:#2ECC71;
     }
-
-
-
 
     .searchBox{
       width:60%;
@@ -76,42 +73,35 @@
       <input id="inpText" type="text" list="locationList" maxlength="200" name="searchQuerry" placeholder="Search Location">
       <input class="inpBtn" type="Submit" value="Search"><br>
     </form>
-  </div>
     <datalist id="locationList">
     </datalist>
+    <script>DSeacrhAjaxCall();</script>
+    
+  </div>
   <script>
-      var divblock = document.getElementById('backGroundImage');
-      var he = window.innerHeight;
+    var divblock = document.getElementById('backGroundImage');
+    var he = window.innerHeight;
 
-      function setImageSize(h){
-        divblock.style.height=h+"px";
-      }
-      function update(){
-        he = window.innerHeight;
-        setImageSize(he);
-      }
-      function showLoginSignup(x){
-          if(x==1){
-            document.getElementById('logSign').style.display = "block";
-            document.getElementById('logSignOverly').style.display = "block";
-          }
-          else{
-            document.getElementById('logSign').style.display = "none";
-            document.getElementById('logSignOverly').style.display = "none";
-          }
-      }
+    function setImageSize(h){
+      divblock.style.height=h+"px";
+    }
+    function update(){
+      he = window.innerHeight;
       setImageSize(he);
-      function LaodHotel(){
-
-      }
-  </script>
-
-  <script src="LoginPopUp/LoginPopUpJS.js"></script>
-  <script src="dynamicSearch/dynamicSearch.js"></script>
-  <script>
-    createLoginButton("login");
-    addLoginForm();
-    DSeacrhAjaxCall();
+    }
+    function showLoginSignup(x){
+        if(x==1){
+          document.getElementById('logSign').style.display = "block";
+          document.getElementById('logSignOverly').style.display = "block";
+        }
+        else{
+          document.getElementById('logSign').style.display = "none";
+          document.getElementById('logSignOverly').style.display = "none";
+        }
+    }
+    setImageSize(he);
+    var isLoggedIn="<?php echo $isLoggedIn; ?>";
+    loginLogoutToggler(isLoggedIn, "login");
   </script>
 
 </body>

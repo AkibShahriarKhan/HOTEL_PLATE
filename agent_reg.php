@@ -1,3 +1,128 @@
+<?php
+ob_start();
+$nameErr = $mailErr = $phoneErr = $passErr = $ageErr = $positionErr = $photoErr = "";
+$name = $mail = $phone = $pass = $age = $position = $photo = "";
+
+function purify($data){
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+
+  return $data;
+  }
+
+//if(isset($_POST["submit"])){
+
+
+   if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+     if(empty($_POST["name"])){
+      $nameErr = "Name Is Required";
+    }
+    else{
+      if(!preg_match("/^[a-zA-Z ]*$/", $_POST["name"])){
+        $nameErr = "Only Letter and Space Allow";
+      }
+    }
+
+    if(empty($_POST["mail"])){
+      $mailErr = "E-mail Is Required";
+    }
+    else{
+      if(!filter_var($_POST["mail"],FILTER_VALIDATE_EMAIL)){
+        $mailErr = "Invalid Email Formate";
+      }
+    }
+
+    if(empty($_POST["phone"])){
+      $phoneErr = "Phone Number Is Required";
+    }
+    else{
+      if(!preg_match("/^[0-9]*$/", $_POST["phone"])){
+        $phoneErr = "Only Number Allow";
+      }
+    }
+
+    if(empty($_POST["pass"])){
+      $passErr = "Password Is Required";
+    }
+    else{
+      $pass = purify($_POST['pass']);
+    }
+
+    if(empty($_POST["age"])){
+      $ageErr = "Age Is Required";
+    }
+    else{
+		if(!preg_match("/^[0-9]*$/", $_POST["age"])){
+        $ageErr = "Only Number Allow";
+      }
+    }
+
+    if(empty($_POST["position"])){
+      $positionErr = "Your Position Is Required";
+    }
+    else{
+		if(!preg_match("/^[a-zA-Z ]*$/", $_POST["position"])){
+        $positionErr = "Only Letter and Space Allow";
+      }
+    }
+
+    if(empty($_POST["photo"])){
+      $photoErr = "Your Photo Is Required";
+    }
+    else{
+      $photo = purify($_POST['fileToUpload']);
+    }
+
+     $name = purify($_POST['name']);
+     $email = purify($_POST['mail']);
+     $phone = purify($_POST['phone']);
+     $pass = purify($_POST['pass']);
+     $age = purify($_POST['age']);
+     $position = purify($_POST['position']);
+     $photo = purify($_POST['fileToUpload']);
+
+
+
+
+
+
+   $servername = "localhost";
+   $username = "root";
+   $password = "";
+   $dbname = "wtproject";
+
+   // Create connection
+   $conn = mysqli_connect($servername, $username, $password, $dbname);
+   // Check connection
+   if (!$conn) {
+       die("Connection failed: " . mysqli_connect_error());
+   }
+
+if(!empty($_POST["mail"])){
+
+ $sql = "INSERT INTO agent (a_name, a_email, a_pass, a_phone, a_age, a_position, a_photo)
+ VALUES ('$name', '$mail', '$pass', '$phone', '$age', '$position', '$photo')";
+
+     if (mysqli_query($conn, $sql)) {
+       echo "<script>alert('Successfully Register!');</script>";
+       header("Location: index.php");
+}
+ else {
+   echo "Error: " . $sql . "<br>" . $conn->error;
+ }
+}
+ else{
+   header("location:agent_reg.php");
+ }
+
+ mysqli_close($conn);
+}
+
+  ?>
+
+
 <!DOCTYPE html>
 
 <html>
@@ -142,7 +267,10 @@
             left: 45%;
             bottom: 0%;
               }
+        .error {
+        	color: #FF0000;
 
+        	}
         </style>
 
 </head>
@@ -156,13 +284,16 @@
 
   </ul>
 
-    <form class="container" action = "<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method = "post">
-      <label>Name </label>
-      <input type="text" name = "name" placeholder="Your Name" required/>
-      <label>Email </label>
-      <input type="email" name = "mail" placeholder="ex: someone@domain.com" required/>
-	  <label>password</label>
-      <input type="password" name = "pass" placeholder="Password" required/>
+    <form class ="container"  method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+      <label>Name</label>
+      <span class="error"><?php echo $nameErr;?></span>
+      <input type="text" name = "name" placeholder="Your Name">
+      <label>Email</label>
+      <span class="error"><?php echo $mailErr;?></span>
+      <input type="email" name = "mail" placeholder="ex: someone@domain.com">
+  	  <label>password</label>
+      <span class="error"><?php echo $passErr;?></span>
+      <input type="password" name = "pass" placeholder="Password">
 
 	  <!--
       <label for="gender">Gender</label>
@@ -170,69 +301,23 @@
 	  <input type="radio" name="gender" value="female">Female
 	  -->
 
-	  <label>Phone </label>
-      <input type="text" name = "phone" placeholder="ex: 01710XXXXXX" required/>
+	    <label>Phone </label>
+      <span class="error"><?php echo $phoneErr;?></span>
+      <input type="text" name = "phone" placeholder="ex: 01710XXXXXX">
       <label>Age</label>
-      <input type="text" name = "age" placeholder="Your Age" required/>
-	  <label>Position</label>
-      <input type="text" name = "position" placeholder="Your Position In Hotel" required/>
-	  
-	  <label>Photo</label>
-	  <input type="file" name="fileToUpload" id="fileToUpload">
+      <span class="error"><?php echo $ageErr;?></span>
+      <input type="text" name = "age" placeholder="Your Age">
+	    <label>Position</label>
+      <span class="error"><?php echo $positionErr;?></span>
+      <input type="text" name = "position" placeholder="Your Position In Hotel">
+	    <label>Photo</label>
+      <span class="error"><?php echo $photoErr;?></span>
+	    <input type="file" name="fileToUpload" id="fileToUpload">
+
 
       <input class = "btn" style = "width: 165px; margin-left: 215px" type = "submit" value = "Register">
 
-	   <?php
-			$servername = "localhost";
-			$username = "root";
-			$password = "";
-			$dbname = "wtproject";
 
-			// Create connection
-			$conn = new mysqli($servername, $username, $password, $dbname);
-			// Check connection
-			if ($conn->connect_error) {
-				die("Connection failed: " . $conn->connect_error);
-			}
-
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-          function purify($data)
-          {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-
-            return $data;
-          }
-
-          $name = purify($_POST['name']);
-          $email = purify($_POST['mail']);
-          $phone = purify($_POST['phone']);
-          $pass = purify($_POST['pass']);
-          $age = purify($_POST['age']);
-          $position = purify($_POST['position']);
-
-		      $photo = purify($_POST['fileToUpload']);
-
-
-
-		  $sql = "INSERT INTO agent (a_name, a_email, a_pass, a_phone, a_age, a_position, a_photo)
-			VALUES ('$name', '$email', '$pass', '$phone', '$age', '$position', '$photo')";
-
-
-		  if ($conn->query($sql) === TRUE) {
-
-				echo "<script type='text/javascript'>alert('Successfully Register!')</script>";
-			} else {
-				echo "Error: " . $sql . "<br>" . $conn->error;
-			}
-
-			$conn->close();
-
-		}
-
-        ?>
     </form>
 
 <footer style = "font-family:calibri; letter-spacing:2px; background: orange; text-transform: uppercase;"> Copyright &copy 2018 </footer>

@@ -1,14 +1,15 @@
 <?php
     session_start();
     //$location=$_SESSION['loc'];
-    echo $_GET['searchQuerry'];
+    $_GET['searchQuerry'] = (isset($_GET['searchQuerry']))?$_GET['searchQuerry']:"%";
+    $isLoggedIn = isset($_SESSION['usr'])?"true":"false";
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
   <title> Home </title>
-
+  
   <style>
     header{
       padding: 20px;
@@ -22,28 +23,8 @@
       font-size: 32px;
       background-color:#2ECC71;}
 
-    div {
-      opacity: 0.8;
-      border-radius: 4px;
-      background-color: #ffcc99;
-      margin-top: 1%;
-      margin-left: 30%;
-      margin-right: 35%;
-      padding: 20px;
-      width: 400px; }
-
-    wl{
-
-        opacity: 0.8;
-        border-radius: 4px;
-        background-color: #ffcc99;
-        margin-top: 1%;
-        margin-left: 30%;
-        margin-right: 35%;
-        padding: 20px;
-        width: 400px;
-        float: right;    }
-
+    
+    
     .container{
       opacity: 0.8;
       border-radius: 4px;
@@ -158,20 +139,52 @@
       text-transform: uppercase;
       font-family: calibri;
       font-weight: lighter;    }
-
+      
+    .searchBox{
+      width:60%;
+      margin:2% 20% 0% 20%;
+      border-radius: 8px;
+      /*border: 1px solid #ff8000;*/
+      text-align: center;
+      padding:10px;
+      box-shadow: 0px 8px 8px -4px rgba(0, 0, 0, 0.2), 0px -8px 8px -4px rgba(0, 0, 0, 0.2);
+    }
+    #inpText{
+      width: 50%;
+      margin: 0% 0% 0% 7.5%;
+      text-align: center;
+      padding: 10px 0px 10px 0px;
+    }
+    .inpBtn{
+      width: 15%;
+      background-color: green;
+      padding: 12px 0px 12px 0px;
+      color: white;
+      border: none;
+      text-decoration: none;
+      text-align: center;
+      margin:0% 7.5% 0% 0%;
+    }
   </style>
+  <link rel="stylesheet" href="LoginPopUp/LoginPopUpCSS.css">
+  <script src="LoginPopUp/LoginPopUpJS.js"></script>
+  <script src="dynamicSearch/dynamicSearch.js"></script>
 
 </head>
 
 <body>
 
-  <header> sala_dia_dhaka </header>
+  <header> sala_dia_dhaka <span id="login"></header>
+  <script>
+    var isLoggedIn="<?php echo $isLoggedIn; ?>";
+    loginLogoutToggler(isLoggedIn, "login");
+  </script>
   <ul>
 
 
 
 
-    <li><a style="float: right; margin: 0;" href="lout.php">LOGOUT</a></li>
+    
     <li><a href="abt.php">About us</a></li>
     <li><a href="con.php">Contact</a></li>
     <li><a href="reg.php">Registration</a></li>
@@ -184,9 +197,17 @@
     <input type="hidden" name = "chk" value = "1">
     <input class = "btn" type = "submit" name = "ch" value = "Checkout">
   </form>
-<container>
 
-</container>
+<div class="searchBox" style="background-color:orange; height:100px;">
+    <form method = "GET" action = "home.php">
+      <input id="inpText" type="text" list="locationList" maxlength="200" name="searchQuerry" placeholder="Search Location">
+      <input class="inpBtn" type="Submit" value="Search"><br>
+    </form>
+    <datalist id="locationList">
+    </datalist>
+    <script>DSeacrhAjaxCall();</script>
+</div>
+
 
   <?php
     $servername = "localhost";
@@ -208,6 +229,14 @@
     //Loading Results
     $result = $stmt->get_result();
 
+    if(!isset($_SESSION['usr']))
+    {
+      $loc = "LoginCheck.php?hotelName=";
+    }
+    else
+    {
+      $loc = "room_view.php?hotelName=";
+    }
     if ($result->num_rows > 0) {
       if(!isset($_GET['edit']) || $_GET['edit'] == 'false'){
   	    while($row = $result->fetch_assoc()) {
@@ -219,7 +248,7 @@
           $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\" width='300' height='200'>";
           echo "<table class='container' width:10%>";
   		    echo "<tr><td>"."NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."ADDRESS:"."</td><td>".$row["h_address"]."</td><tr><td> "."PHONE"."</td><td>".$row["h_phone"]."</td><tr><td>"."TIN Number:"."</td><td>".$row["h_TIN"]."</td><tr><td>"."AGENT:"."</td><td>".$row["a_email"]."</td><tr><td>"."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
-          echo " <tr><td><a href='room_view.php?hotelName=".$row['h_name']."'>Room View</a></td></tr></table>";
+          echo " <tr><td><a href='".$loc.$row['h_name']."'>Room View</a></td></tr></table>";
         }
 
     }
@@ -242,96 +271,6 @@
     }
   //}
   ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!--
-  <table class = "tableC" style = "margin-left:1PX;">
-    <tr>
-      <th> HOTEL 1 </th>
-      <th> HOTEL 2 </th>
-      <th> HOTEL 3 </th>
-    </tr>
-    <tr>
-
-      <td style = "border: 2px solid grey;" >
-
-
-        <form action = "add.php" method="post">
-
-          <label>Room ID:</label><br>
-
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: -10px; margin-left: -120px" type = "text" name = "id" value = "R1" readonly><img src="img/r1.jpg" style="width:200px; height:auto; alt="h1">
-          <label>Price($): </label><br>
-
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: 10px; margin-left: -120px" type = "text" name = "price" value = "200" readonly>
-          <label>Room Quantity: </label>
-          <input style = "width:40px; margin-top: 50px; margin-left: -120px;" type = "text" name = "Quan">
-          <input type = "submit" value = "Book">
-
-        </form>
-      </td>
-
-
-      <td style = "border: 2px solid grey;">
-
-        <form action = "add.php?>" method="post">
-          <label>Room ID:</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: -10px; margin-left: -120px" type = "text" name = "id" value = "R2" readonly><img src="img/r2.jpg" style="width:200px; height:auto; alt="h2">
-          <label>Price($):</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: 10px; margin-left: -120px" type = "text" name = "price" value = "200" readonly>
-          <label>Room Quantity:</label>
-          <input style = "width:40px; margin-top: 50px; margin-left: -120px;" type = "text" name = "Quan">
-          <input type = "submit" value = "Book">
-        </form>
-      </td>
-
-
-      <td style = "border: 2px solid grey;">
-
-        <form action = "add.php?>" method="post">
-          <label>Room ID:</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: -10px; margin-left: -120px" type = "text" name = "id" value = "R3" readonly><img src="img/r3.jpg" style="width:200px; height:auto; alt="h3">
-          <label>Price($):</label><br>
-          <input style = "float: left;border: 0px; width:40px; background-color: #D6EAF8; color: black; margin-top: 10px; margin-left: -120px" type = "text" name = "price" value = "200" readonly>
-          <label>Room Quantity:</label>
-          <input style = "width:40px; margin-top: 50px; margin-left: -120px;" type = "text" name = "Quan">
-          <input type = "submit" value = "Book">
-        </form>
-      </td>
-
-  </table>
-
-  <table class = "tableC2">
-    <tr>
-      <th>ROOM</th>
-      <th>Quantity</th>
-      <th>Price</th>
-    </tr>-->
-
-
-
-
     <?php
       if(isset($_SESSION['arr']) && !empty($_SESSION['arr']))
       {
@@ -341,7 +280,7 @@
         {
           echo "<tr style = 'text-align:center'><td style = 'border: 1px solid grey; width: 100px;'><center>".$x."</center></td>";
           echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[0]."</td>";
-          echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[0]*$x_val[1]."<form style = 'display: inline-block; float:right;' action= 'rem.php' method='post'> <input type='hidden' name = 'r' value = '".$x."'> <input style='margin-left:150px; margin-top:-200px;' type = 'submit' value = 'remove'></td></tr>";
+          echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[0]*$x_val[1]."<form style = 'display: block;' action= 'rem.php' method='post'> <input type='hidden' name = 'r' value = '".$x."'> <input style='margin-left:150px; margin-top:-200px;' type = 'submit' value = 'remove'></td></tr>";
           $temp += $x_val[0]*$x_val[1];
         }
         if(!empty($_SESSION['arr']))

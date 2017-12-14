@@ -1,4 +1,4 @@
-#logSignBtn{
+#logSignBtn, #logoutBtn{
   width: 10%;
   background-color: green;
   padding: 12px 0px;
@@ -9,29 +9,38 @@
 #logSignOverly{
   display:none;
   position:fixed;
+  width:100%;
+  margin:0;
   left:0;
   right:0;
   top:0;
   bottom:0;
   background-color: black;
   opacity:0.7;
-  z-index:2;
+  z-index:20;
 }
 #logSign{
+  display: none;
   position: absolute;
+  width: 20%;
+  margin:0;
   top:35%;
   left:40%;
-  display: none;
-  z-index:3;
-  width: 20%;
+  z-index:20;
   padding:10px 0px;
   background-color: rgba(123,123,123,0.3);
+  opacity:1;
 }
 #logSign input{
   width:80%;
   padding:10px 0px;
   margin: 10px 0px 0px 0px;
   text-align:center;
+  float: none;
+}
+#signupInp{
+  border: 2px solid #ffcc99;
+  width:80%;
 }
 button{
   width:80%;

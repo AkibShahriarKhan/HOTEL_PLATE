@@ -120,7 +120,7 @@
       var i=1;
       $('#single').click(function(){
            i++;
-           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" placeholder="Enter Room Number" class="form-control name_list" /></td><td>AC<select name = "ac"><option value="Yes">Yes</option><option value="No">No</option></select></td><td><input type="text" name="cost[]" placeholder="Enter Cost" class="form-control name_list" /> <td> <label>Photo</label> <input type="file" name="fileToUpload" id="fileToUpload"><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" placeholder="Enter Room Number" class="form-control name_list" /></td><td>AC<select name = "ac"><option value="Yes">Yes</option><option value="No">No</option></select></td><td><input type="text" name="cost[]" placeholder="Enter Cost" class="form-control name_list" /> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
       });
 
 

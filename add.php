@@ -6,11 +6,11 @@
 
   $update = false;
 
-  if($_SERVER['REQUEST_METHOD'] == 'POST')
+  if($_SERVER['REQUEST_METHOD'] == 'GET')
   {
-    $id = $_POST['id'];
-    $q = $_POST['Quan'];
-    $pr = $_POST['price'];
+    $id = $_GET['h_name'];
+    $q = $_GET['c_id'];
+    $pr = $_GET['cost'];
 
     if(isset($_SESSION['arr']))
     {
@@ -18,8 +18,8 @@
 
       if(array_key_exists($id, $ar))
       {
-        $ar[$id][0] += $q;
-        $ar[$id][1] = $pr;
+        $ar[$id][0] = $q;
+        $ar[$id][1] += $pr;
 
         print_r($ar);
 
@@ -49,6 +49,6 @@
     echo "<meta http-equiv='refresh' content='0'>";
     $update = false;
   }
-
-  header("Location: home.php");
+  
+  header("Location: room_view.php?hotelName=".$_SESSION['hn']);
  ?>

@@ -291,8 +291,8 @@
         {
           echo "<tr style = 'text-align:center'><td style = 'border: 1px solid grey; width: 100px;'><center>".$x."</center></td>";
           echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[0]."</td>";
-          echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[0]*$x_val[1]."<form style = 'display: inline-block; float:right;' action= 'rem.php' method='post'> <input type='hidden' name = 'r' value = '".$x."'> <input style='margin-left:150px; margin-top:-200px;' type = 'submit' value = 'remove'></td></tr>";
-          $temp += $x_val[0]*$x_val[1];
+          echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[1]."<form style = 'display: inline-block; float:right;' action= 'rem.php' method='post'> <input type='hidden' name = 'r' value = '".$x."'> <input style='margin-left:150px; margin-top:-200px;' type = 'submit' value = 'remove'></td></tr>";
+      
         }
         if(!empty($_SESSION['arr']))
         {

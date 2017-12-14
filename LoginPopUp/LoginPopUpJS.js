@@ -2,7 +2,7 @@ loghtml = `
 <center>
     <div id="logSignOverly"></div>
     <div id="logSign">  
-        <form>
+        <form style="width:100%;">
             <input id="username" type = "text" name = "usr" placeholder="User Name" required/><br>
             <h6 id="nameErr"></h6><br>
             <input id="password" type="password" name="pass" placeholder="Password" required/><br>
@@ -10,19 +10,21 @@ loghtml = `
         </form>
         <button style="border: 2px solid #ffcc99;" onclick="LoginAjaxCall()">LOGIN</button><br>
         <a href="#">Forgot Password?</a><br>
-        <form action="reg.php">
-            <input style="border: 2px solid #ffcc99;" type = "submit" value = "SIGN UP"/>
-        </form>
+        <form action="reg.php" style="width:100%;">
+            <input id="signupInp" style="width:80%;" type = "submit" value = "SIGN UP"/>
+        </form><br>
         <button style="margin:10px 0px 0px 0px;" onclick="showLoginSignup(0)">Cancel</button>
     </div>
 </center>
 `;
 
-logbtn = `<button id="logSignBtn" style="float:right;" onclick="showLoginSignup(1)">Login/Signup</button>`;
+logINbtn = `<button id="logSignBtn" style="float:right;" onclick="showLoginSignup(1)">Login/Signup</button>`;
+logOUTbtn = `<button id="logoutBtn" style="float:right;" onclick="logout()">Logout</button>`;
 
 
 function createLoginButton(idOfParent){
-    document.getElementById(idOfParent).innerHTML = logbtn;
+  document.getElementById(idOfParent).innerHTML ='';
+  document.getElementById(idOfParent).innerHTML = logINbtn;
 }
 function addLoginForm(){
     document.body.innerHTML += loghtml;
@@ -47,7 +49,8 @@ function LoginAjaxCall() {
       response = this.responseText;
       console.log(response);
       if(response == 1){
-        window.location.href = "home.php";//relative path with respect to the hosting html page
+        //window.location.href = "home.php";//relative path with respect to the hosting html page
+        document.location.reload();
       }
       else if(response == 5)
       {
@@ -72,4 +75,30 @@ function LoginAjaxCall() {
 function FakeLoginAjaxCall() {
   console.log(document.getElementById('username').value);
   console.log(document.getElementById('password').value);
+}
+
+function createLogOutButton(idOfParent){
+  document.getElementById(idOfParent).innerHTML ='';
+  document.getElementById(idOfParent).innerHTML = logOUTbtn;
+}
+function logout(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.location.reload();
+    }
+  }
+  xhttp.open("GET", "LoginPopUp/logout.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();  
+}
+
+function loginLogoutToggler(tf, container){
+  if(isLoggedIn == "true"){
+    createLogOutButton(container);
+  }
+  else{
+    createLoginButton(container);
+    addLoginForm();
+  }
 }

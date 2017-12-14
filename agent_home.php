@@ -177,34 +177,46 @@
     <li style="margin-top:00px;"><a class = "active" href="agent_home.php">Home</a></li>
   </ul>
 
-  <form style = "position: fixed; margin-left: 85%;" action  = "chk.php" method = "post">
-    <input type="hidden" name = "chk" value = "1">
-    <input class = "btn" type = "submit" name = "ch" value = "Checkout">
-  </form>
-
   
 
 
 
 
     <?php
-    /*  if(isset($_SESSION['arr']) && !empty($_SESSION['arr']))
-      {
-        $temp = 0;
-        $arr1 = $_SESSION['arr'];
-        foreach($arr1 as $x => $x_val)
-        {
-          echo "<tr style = 'text-align:center'><td style = 'border: 1px solid grey; width: 100px;'><center>".$x."</center></td>";
-          echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[0]."</td>";
-          echo "<td style = 'border: 1px solid grey; width: 100px;'>".$x_val[0]*$x_val[1]."<form style = 'display: inline-block; float:right;' action= 'rem.php' method='post'> <input type='hidden' name = 'r' value = '".$x."'> <input style='margin-left:150px; margin-top:-200px;' type = 'submit' value = 'remove'></td></tr>";
-          $temp += $x_val[0]*$x_val[1];
-        }
-        if(!empty($_SESSION['arr']))
-        {
-          echo "<tr style = 'text-align:center'><td>Total</td> <td> </td> <td>".$temp."</td></tr>";
-          $_SESSION['total'] = $temp;
-        }
-      }*/
+      $servername = "localhost";
+      $username = "root";
+      $password = "";
+      $dbname = "wtproject";
+
+      // Create connection
+      $conn = new mysqli($servername, $username, $password, $dbname);
+      // Check connection
+      if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+      }
+      $stmt = $conn->prepare("SELECT h_name, h_address, h_phone, h_TIN, a_email, h_photo1 FROM hotel_info where a_email = ?");
+      $stmt->bind_param("s", $_SESSION['usr']);
+
+      //Executing Query
+      $stmt->execute();
+      //Loading Results
+      $result = $stmt->get_result();
+
+      if ($result->num_rows > 0) {
+      
+          while($row = $result->fetch_assoc()) {
+            $image_data = $row["h_photo1"];
+            $image_name = $row["h_name"];
+            $encoded_image = base64_encode($image_data);
+            //You dont need to decode it again.
+  
+            $Hinh = "<img src='data:image/jpeg;base64,{$encoded_image}' alt=\"$image_name\" width='300' height='200'>";
+            echo "<table class='container' width:10%>";
+            echo "<tr><td>"."NAME:"."</td><td>".$row["h_name"]."</td><tr><td>"."ADDRESS:"."</td><td>".$row["h_address"]."</td><tr><td> "."PHONE"."</td><td>".$row["h_phone"]."</td><tr><td>"."TIN Number:"."</td><td>".$row["h_TIN"]."</td><tr><td>"."AGENT:"."</td><td>".$row["a_email"]."</td><tr><td>"."</td><tr><td>"."PHOTO:"."</td><td>"."$Hinh</img>"."</td></tr>";
+          }
+  
+      
+    }
     ?>
 
 

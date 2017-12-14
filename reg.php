@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-
+<?php
+ob_start();
+?>
 <html>
 <head>
   <title> Registration </title>
@@ -173,6 +175,7 @@
 	  <a href="agent_reg.php">Register as An Agent?</a>
 
 	   <?php
+      
 			$servername = "localhost";
 			$username = "root";
 			$password = "";
@@ -210,7 +213,9 @@
 
 
 		  if ($conn->query($sql) === TRUE) {
-				echo "New record created successfully";
+        echo "New record created successfully";
+        header("Location: index.php");
+        exit;
 			} else {
 				echo "Error: " . $sql . "<br>" . $conn->error;
 			}

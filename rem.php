@@ -9,6 +9,6 @@
 
   $_SESSION['arr'] = $ar;
 
-  header("Location: home.php");
+  header("Location: room_view.php?hotelName=".$_SESSION['hn']);
   exit;
  ?>
